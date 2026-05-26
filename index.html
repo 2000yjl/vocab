@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WordForge 终极实用英语词典</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <section id="login" class="login-screen">
+      <div class="cover-stage">
+        <article class="hero-book">
+          <span>WordForge</span>
+          <strong>终极实用英语词典</strong>
+          <small>CET · TOEIC · TOEFL · IELTS · Business · Daily</small>
+        </article>
+      </div>
+      <form id="loginForm" class="login-panel">
+        <p class="eyebrow">像一本会说话、会复习、会跳转的词典</p>
+        <h1>从考试词汇到真实表达，一次整理清楚。</h1>
+        <p class="lead">书架分库、翻页学习、词根派生、短语范例、美音/英音朗读、衍生词跳转、错题复现和拼写训练都在这里。</p>
+        <label>账号 <input id="username" autocomplete="username" placeholder="teacher 或 001" /></label>
+        <label>密码 <input id="password" type="password" autocomplete="current-password" placeholder="默认 123456" /></label>
+        <button class="primary" type="submit">进入词典</button>
+        <p id="loginError" class="error"></p>
+        <p class="hint">默认账号：teacher、001-300；默认密码均为 123456。真正全网同步密码需要接 Supabase Auth。</p>
+      </form>
+    </section>
+
+    <main id="app" class="app hidden">
+      <header class="topbar">
+        <div class="brand-block">
+          <span>WordForge</span>
+          <strong>终极实用英语词典</strong>
+        </div>
+        <nav class="tabs" aria-label="学习模式">
+          <button class="tab active" data-view="shelf">书架</button>
+          <button class="tab" data-view="reader">翻页</button>
+          <button class="tab" data-view="dictionary">词典</button>
+          <button class="tab" data-view="practice">训练</button>
+          <button class="tab" data-view="settings">账号</button>
+        </nav>
+        <button id="logoutBtn" class="ghost">退出</button>
+      </header>
+
+      <section id="shelf" class="view active">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">选择一本词典开始</p>
+            <h2>不再一行四个乱卡片，而是按目标进入一本书。</h2>
+            <p class="lead">每本词典都有自己的封面、用途、排序和学习路径。点击封面会进入翻页模式，从第一个词开始。</p>
+          </div>
+          <div class="stats">
+            <span>词条 <strong id="totalCount">0</strong></span>
+            <span>掌握 <strong id="knownCount">0</strong></span>
+            <span>待复习 <strong id="dueCount">0</strong></span>
+            <span>连胜 <strong id="streakCount">0</strong></span>
+          </div>
+        </div>
+        <div id="deckShelf" class="deck-shelf"></div>
+      </section>
+
+      <section id="reader" class="view">
+        <div class="reader-layout">
+          <aside class="reader-side">
+            <p class="eyebrow">当前词典</p>
+            <h2 id="readerDeckTitle">选择一本词典</h2>
+            <p id="readerDeckMeta" class="lead"></p>
+            <div class="reader-controls">
+              <button id="prevWord" class="ghost">上一页</button>
+              <button id="nextWord" class="primary">下一页</button>
+            </div>
+            <label>排序
+              <select id="sortMode">
+                <option value="book">词典顺序</option>
+                <option value="az">A-Z</option>
+                <option value="hard">错题优先</option>
+              </select>
+            </label>
+          </aside>
+          <article id="wordPage" class="word-page"></article>
+        </div>
+      </section>
+
+      <section id="dictionary" class="view">
+        <div class="dictionary-layout">
+          <aside class="filter-panel">
+            <label>词典 <select id="deckFilter"></select></label>
+            <label>搜索 <input id="searchBox" type="search" placeholder="英文 / 中文 / 词根 / 短语" /></label>
+            <p id="resultMeta" class="hint"></p>
+            <div id="wordList" class="word-list"></div>
+          </aside>
+          <article id="detailPanel" class="detail-panel"></article>
+        </div>
+      </section>
+
+      <section id="practice" class="view">
+        <div class="practice-card">
+          <p class="eyebrow" id="practiceMode">主动回忆</p>
+          <h2 id="quizPrompt">准备开始</h2>
+          <p id="quizMeta" class="lead"></p>
+          <div id="quizAnswer" class="answer hidden"></div>
+          <input id="spellInput" class="spell-input hidden" autocomplete="off" placeholder="拼写英文" />
+          <p id="practiceFeedback" class="feedback"></p>
+          <div class="actions">
+            <button id="showAnswer" class="ghost">看答案</button>
+            <button id="speakQuizUS" class="ghost">美音</button>
+            <button id="speakQuizUK" class="ghost">英音</button>
+            <button id="hardBtn" disabled>没记住</button>
+            <button id="easyBtn" class="primary" disabled>记住了</button>
+            <button id="spellModeBtn" class="ghost">切换拼写</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="settings" class="view">
+        <div class="settings-card">
+          <p class="eyebrow">账号设置</p>
+          <h2>更改自己的账号和密码</h2>
+          <p id="currentAccountLabel" class="lead"></p>
+          <label>当前密码 <input id="currentPassword" type="password" autocomplete="current-password" /></label>
+          <label>新账号 <input id="newUsername" autocomplete="username" placeholder="例如 yang 或 001" /></label>
+          <label>新密码 <input id="newPassword" type="password" autocomplete="new-password" placeholder="至少 4 位" /></label>
+          <button id="saveAccountBtn" class="primary" type="button">保存设置</button>
+          <p id="accountFeedback" class="feedback"></p>
+          <p class="hint">当前版本的自定义账号保存在本机浏览器。要跨设备同步改密码，请提供 Supabase Project URL 和 anon public key 后接入真正认证。</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
