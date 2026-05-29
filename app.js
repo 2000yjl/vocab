@@ -5,6 +5,7 @@ const DEFAULT_AUTH = {
 
 let AUTH = loadAuth();
 let user = localStorage.getItem("wordforge-user") || "";
+let authMode = "local";
 let state = {};
 let activeDeck = "cet4";
 let activeWordId = 1;
@@ -13,12 +14,17 @@ let quizIndex = 0;
 let quizMode = "recall";
 let answerShown = false;
 let streak = 0;
+let availableVoices = [];
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 const decks = window.WORDFORGE_DECKS || [];
 const words = window.WORDFORGE_WORDS || [];
 const roots = window.WORDFORGE_ROOTS || [];
+const supabaseConfig = window.WORDFORGE_SUPABASE || null;
+const supabaseClient = window.supabase && supabaseConfig
+  ? window.supabase.createClient(supabaseConfig.url, supabaseConfig.anonKey)
+  : null;
 
 function loadAuth() {
   return { ...DEFAULT_AUTH, ...JSON.parse(localStorage.getItem("wordforge-custom-auth") || "{}") };
@@ -33,6 +39,18 @@ function saveCustomAuth(nextAuth) {
   AUTH = loadAuth();
 }
 
+function isDefaultAccount(name) {
+  return name === "teacher" || /^\d{3}$/.test(name);
+}
+
+function accountEmail(name) {
+  return `${name}@${supabaseConfig?.emailDomain || "wordforge.local"}`;
+}
+
+function accountNameFromEmail(email) {
+  return String(email || "").split("@")[0];
+}
+
 function stateKey(name) { return `wordforge-state-${name}`; }
 
 function loadState() {
@@ -44,6 +62,7 @@ function saveState() {
   localStorage.setItem(stateKey(user), JSON.stringify(state));
   localStorage.setItem(`${stateKey(user)}-streak`, String(streak));
   renderStats();
+  renderDailyPlan();
 }
 
 function escapeHtml(value) {
@@ -71,8 +90,25 @@ function wordScore(word) {
   return (s.wrong || 0) * 3 - (s.right || 0) * 2;
 }
 
-function login(name, pass) {
-  if (!AUTH[name] || AUTH[name] !== pass) return false;
+function deckProgress(deckId) {
+  const list = deckWords(deckId);
+  if (!list.length) return 0;
+  const known = list.filter((word) => (state[word.id]?.right || 0) >= 2).length;
+  return Math.round((known / list.length) * 100);
+}
+
+function recommendedDeck() {
+  return [...decks].sort((a, b) => deckProgress(a.id) - deckProgress(b.id))[0] || decks[0];
+}
+
+async function login(name, pass) {
+  if (supabaseClient) {
+    const result = await loginWithSupabase(name, pass);
+    if (!result.ok) throw new Error(result.message);
+    authMode = "supabase";
+  } else if (!AUTH[name] || AUTH[name] !== pass) {
+    return false;
+  }
   user = name;
   localStorage.setItem("wordforge-user", user);
   loadState();
@@ -82,6 +118,36 @@ function login(name, pass) {
   return true;
 }
 
+async function loginWithSupabase(name, pass) {
+  const email = accountEmail(name);
+  let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: pass });
+  if (!error && data?.session) return { ok: true };
+
+  const canBootstrap = isDefaultAccount(name) && pass === "123456";
+  if (!canBootstrap) {
+    return { ok: false, message: "账号或密码不正确。" };
+  }
+
+  const signup = await supabaseClient.auth.signUp({
+    email,
+    password: pass,
+    options: { data: { login_name: name } }
+  });
+  if (signup.error && !/registered|exists|already/i.test(signup.error.message)) {
+    if (/rate limit|email/i.test(signup.error.message)) {
+      return { ok: false, message: "Supabase 正在尝试发送确认邮件或触发邮件限制。请在 Authentication > Providers > Email 里关闭 Confirm email。" };
+    }
+    return { ok: false, message: signup.error.message };
+  }
+  if (!signup.data?.session) {
+    const retry = await supabaseClient.auth.signInWithPassword({ email, password: pass });
+    if (retry.error || !retry.data?.session) {
+      return { ok: false, message: "Supabase 已创建/识别账号，但当前项目可能开启了邮箱确认。请在 Authentication 里关闭 Confirm email 后再试。" };
+    }
+  }
+  return { ok: true };
+}
+
 function renderStats() {
   $("#totalCount").textContent = words.length;
   $("#knownCount").textContent = words.filter((word) => (state[word.id]?.right || 0) >= 2).length;
@@ -89,9 +155,40 @@ function renderStats() {
   $("#streakCount").textContent = streak;
 }
 
+function renderDailyPlan() {
+  const holder = $("#dailyPlan");
+  if (!holder) return;
+  const deck = recommendedDeck();
+  const due = words.filter((word) => (state[word.id]?.wrong || 0) > (state[word.id]?.right || 0)).length;
+  holder.innerHTML = `
+    <button class="daily-card" data-action="continue">
+      <small>今日 20 分钟</small>
+      <strong>${escapeHtml(deck.title)}</strong>
+      <span>从掌握率最低的一本开始，先学 8 个，再复习 12 个。</span>
+    </button>
+    <button class="daily-card" data-action="sound">
+      <small>听读训练</small>
+      <strong>美音 + 英音</strong>
+      <span>先听单词，再听例句，跟读到能自然说出来。</span>
+    </button>
+    <button class="daily-card" data-action="review">
+      <small>错题回炉</small>
+      <strong>${due} 个待复习</strong>
+      <span>用主动回忆处理错词，比反复看中文更牢。</span>
+    </button>
+  `;
+  holder.querySelector('[data-action="continue"]').addEventListener("click", () => openDeck(deck.id));
+  holder.querySelector('[data-action="sound"]').addEventListener("click", () => openDeck(deck.id));
+  holder.querySelector('[data-action="review"]').addEventListener("click", () => {
+    quizMode = "recall";
+    switchView("practice");
+  });
+}
+
 function renderShelf() {
   $("#deckShelf").innerHTML = decks.map((deck) => {
     const total = deckWords(deck.id).length;
+    const progress = deckProgress(deck.id);
     return `
       <button class="deck-cover" data-deck="${deck.id}" data-tone="${deck.tone}">
         <span class="book-tag">${escapeHtml(deck.order)}</span>
@@ -99,7 +196,10 @@ function renderShelf() {
           <h3>${escapeHtml(deck.title)}</h3>
           <p>${escapeHtml(deck.desc)}</p>
         </div>
-        <p>${total} 个词条 · 点击翻开</p>
+        <div>
+          <p>${total} 个词条 · 掌握 ${progress}%</p>
+          <span class="deck-progress"><i style="width:${progress}%"></i></span>
+        </div>
       </button>
     `;
   }).join("");
@@ -110,6 +210,7 @@ function renderShelf() {
 
 function renderDeckFilter() {
   $("#deckFilter").innerHTML = `<option value="all">全部词典</option>${decks.map((deck) => `<option value="${deck.id}">${escapeHtml(deck.title)}</option>`).join("")}`;
+  $("#deckFilter").value = activeDeck;
 }
 
 function openDeck(deckId) {
@@ -121,29 +222,75 @@ function openDeck(deckId) {
   renderReader();
 }
 
+function refreshVoices() {
+  if (!("speechSynthesis" in window)) return [];
+  availableVoices = window.speechSynthesis.getVoices();
+  return availableVoices;
+}
+
+function voiceRank(voice, locale) {
+  const name = `${voice.name} ${voice.voiceURI}`.toLowerCase();
+  let score = voice.lang === locale ? 40 : voice.lang.startsWith(locale.slice(0, 2)) ? 20 : 0;
+  if (/natural|neural|enhanced|premium|online|google|samantha|daniel|serena|arthur|ava|allison|karen|moira/.test(name)) score += 30;
+  if (/microsoft/.test(name)) score -= 8;
+  if (voice.localService === false) score += 4;
+  return score;
+}
+
+function bestVoice(locale) {
+  const voices = availableVoices.length ? availableVoices : refreshVoices();
+  return [...voices]
+    .filter((voice) => voice.lang === locale || voice.lang.startsWith(locale.slice(0, 2)))
+    .sort((a, b) => voiceRank(b, locale) - voiceRank(a, locale))[0] || null;
+}
+
+function voiceLabel(locale) {
+  const voice = bestVoice(locale);
+  if (!voice) return locale === "en-US" ? "美音：浏览器默认" : "英音：浏览器默认";
+  return `${locale === "en-US" ? "美音" : "英音"}：${voice.name}`;
+}
+
 function speak(text, locale) {
   if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = locale;
-  utterance.rate = 0.86;
-  const voices = window.speechSynthesis.getVoices();
-  utterance.voice = voices.find((voice) => voice.lang === locale) || voices.find((voice) => voice.lang.startsWith(locale.slice(0, 2))) || null;
+  utterance.rate = 0.9;
+  utterance.pitch = 1;
+  utterance.voice = bestVoice(locale);
   window.speechSynthesis.speak(utterance);
 }
 
 function rootExplanation(rootName) {
   const found = roots.find((root) => root.root === rootName);
-  return found ? `${found.meaning}。${found.method}` : "用拆音节、场景句和同类词一起记。";
+  return found ? `${found.meaning}。${found.method}` : "";
 }
 
 function detailHtml(word) {
   const familyLinks = word.family.map((item) => {
     const target = findWordByText(item);
-    const attr = target ? `data-word-id="${target.id}"` : "";
-    return `<button class="link-chip" ${attr}>${escapeHtml(item)}</button>`;
+    const attr = target ? `data-word-id="${target.id}"` : "disabled";
+    return `<button class="link-chip" type="button" ${attr}>${escapeHtml(item)}</button>`;
   }).join("");
-  const parentLink = word.parent ? `<button class="link-chip" data-word-id="${findWordByText(word.parent)?.id || ""}">核心词：${escapeHtml(word.parent)}</button>` : "";
+  const parent = word.parent ? findWordByText(word.parent) : null;
+  const parentLink = parent ? `<button class="link-chip" type="button" data-word-id="${parent.id}">核心词：${escapeHtml(word.parent)}</button>` : "";
+  const meaningRows = (word.meanings || [{ cn: word.cn, example: word.example }]).map((item, index) => `
+    <div class="meaning-row">
+      <b>${index + 1}. ${escapeHtml(item.cn)}</b>
+      <p>${escapeHtml(item.example)}</p>
+      <button class="ghost speak sentence-sound" type="button" data-locale="en-US" data-text="${escapeHtml(item.example)}">朗读例句</button>
+    </div>
+  `).join("");
+  const phraseRows = (word.phraseItems || word.phrases.map((phrase) => ({ text: phrase, cn: "" }))).map((phrase) => `
+    <div class="phrase">
+      <b>${escapeHtml(phrase.text)}</b>
+      <span>${escapeHtml(phrase.cn)}</span>
+    </div>
+  `).join("");
+  const memoryTitle = word.root === "chunking" ? "记忆方法" : "词根/构词";
+  const memoryBody = word.root === "chunking"
+    ? `<p>${escapeHtml(word.memory)}</p>`
+    : `<p><strong>${escapeHtml(word.root)}</strong>：${escapeHtml(rootExplanation(word.root))}</p><p>${escapeHtml(word.memory)}</p>`;
   return `
     <div class="word-head">
       <div>
@@ -155,19 +302,19 @@ function detailHtml(word) {
         <button class="ghost speak" data-locale="en-GB" data-text="${escapeHtml(word.word)}">英音</button>
       </div>
     </div>
+    <div class="voice-note">${escapeHtml(voiceLabel("en-US"))} · ${escapeHtml(voiceLabel("en-GB"))}</div>
     <div class="detail-grid">
       <section class="detail-box">
-        <h4>词根/构词</h4>
-        <p><strong>${escapeHtml(word.root)}</strong>：${escapeHtml(rootExplanation(word.root))}</p>
-        <p>${escapeHtml(word.memory)}</p>
+        <h4>${memoryTitle}</h4>
+        ${memoryBody}
       </section>
       <section class="detail-box">
         <h4>范例短语</h4>
-        <div class="phrase-list">${word.phrases.map((phrase) => `<div class="phrase">${escapeHtml(phrase)}</div>`).join("")}</div>
+        <div class="phrase-list">${phraseRows}</div>
       </section>
       <section class="detail-box">
-        <h4>例句</h4>
-        <p>${escapeHtml(word.example)}</p>
+        <h4>释义与母语例句</h4>
+        <div class="meaning-list">${meaningRows}</div>
       </section>
       <section class="detail-box">
         <h4>衍生/相关词</h4>
@@ -210,6 +357,8 @@ function openWord(id) {
   const list = sortedDeckWords(activeDeck);
   readerIndex = Math.max(0, list.findIndex((item) => item.id === word.id));
   activeWordId = word.id;
+  if ($("#deckFilter")) $("#deckFilter").value = word.deckId;
+  if ($("#searchBox")) $("#searchBox").value = "";
   switchView("dictionary");
   renderDictionary(word.id);
 }
@@ -299,13 +448,13 @@ function showSettings() {
   $("#accountFeedback").className = "feedback";
 }
 
-function saveAccountSettings() {
+async function saveAccountSettings() {
   const currentPassword = $("#currentPassword").value.trim();
   const nextName = $("#newUsername").value.trim();
   const nextPassword = $("#newPassword").value.trim();
   const feedback = $("#accountFeedback");
   feedback.className = "feedback";
-  if (AUTH[user] !== currentPassword) {
+  if (!supabaseClient && AUTH[user] !== currentPassword) {
     feedback.textContent = "当前密码不正确。";
     feedback.classList.add("bad");
     return;
@@ -325,19 +474,42 @@ function saveAccountSettings() {
     feedback.classList.add("bad");
     return;
   }
-  const nextAuth = { ...AUTH };
-  delete nextAuth[user];
-  nextAuth[nextName] = nextPassword;
+  if (supabaseClient) {
+    const signedIn = await supabaseClient.auth.signInWithPassword({
+      email: accountEmail(user),
+      password: currentPassword
+    });
+    if (signedIn.error) {
+      feedback.textContent = "当前密码不正确。";
+      feedback.classList.add("bad");
+      return;
+    }
+    const updatePayload = { password: nextPassword, data: { login_name: nextName } };
+    if (nextName !== user) updatePayload.email = accountEmail(nextName);
+    const updated = await supabaseClient.auth.updateUser(updatePayload);
+    if (updated.error) {
+      feedback.textContent = updated.error.message;
+      feedback.classList.add("bad");
+      return;
+    }
+  } else {
+    const nextAuth = { ...AUTH };
+    delete nextAuth[user];
+    nextAuth[nextName] = nextPassword;
+    saveCustomAuth(nextAuth);
+  }
   user = nextName;
   localStorage.setItem("wordforge-user", user);
-  saveCustomAuth(nextAuth);
-  feedback.textContent = "已保存。本机浏览器下次请用新账号和新密码登录。";
+  feedback.textContent = supabaseClient
+    ? "已保存到 Supabase。其他设备请使用新账号和新密码登录。"
+    : "已保存。本机浏览器下次请用新账号和新密码登录。";
   feedback.classList.add("ok");
   showSettings();
 }
 
 function renderAll() {
   renderStats();
+  renderDailyPlan();
   renderShelf();
   renderDeckFilter();
   renderDictionary();
@@ -345,14 +517,23 @@ function renderAll() {
   renderQuiz();
 }
 
-$("#loginForm").addEventListener("submit", (event) => {
+$("#loginForm").addEventListener("submit", async (event) => {
   event.preventDefault();
-  const ok = login($("#username").value.trim(), $("#password").value.trim());
-  $("#loginError").textContent = ok ? "" : "账号或密码不正确。";
+  $("#loginError").textContent = "";
+  try {
+    const ok = await login($("#username").value.trim(), $("#password").value.trim());
+    $("#loginError").textContent = ok ? "" : "账号或密码不正确。";
+  } catch (error) {
+    $("#loginError").textContent = error.message || "登录失败。";
+  }
 });
 
 $$(".tab").forEach((tab) => tab.addEventListener("click", () => switchView(tab.dataset.view)));
-$("#logoutBtn").addEventListener("click", () => { localStorage.removeItem("wordforge-user"); location.reload(); });
+$("#logoutBtn").addEventListener("click", async () => {
+  if (supabaseClient) await supabaseClient.auth.signOut();
+  localStorage.removeItem("wordforge-user");
+  location.reload();
+});
 $("#prevWord").addEventListener("click", () => { readerIndex = Math.max(0, readerIndex - 1); renderReader(); });
 $("#nextWord").addEventListener("click", () => { readerIndex = (readerIndex + 1) % sortedDeckWords(activeDeck).length; renderReader(); });
 $("#sortMode").addEventListener("change", () => { readerIndex = 0; renderReader(); });
@@ -371,12 +552,45 @@ $("#easyBtn").addEventListener("click", () => markQuiz(true));
 $("#spellModeBtn").addEventListener("click", () => { quizMode = quizMode === "spell" ? "recall" : "spell"; renderQuiz(); });
 $("#spellInput").addEventListener("keydown", (event) => { if (event.key === "Enter") checkSpell(); });
 $("#saveAccountBtn").addEventListener("click", saveAccountSettings);
+$("#continueBtn").addEventListener("click", () => openDeck(recommendedDeck().id));
+$("#reviewBtn").addEventListener("click", () => {
+  quizMode = "recall";
+  switchView("practice");
+});
 
-if (user && AUTH[user]) {
-  loadState();
-  $("#login").classList.add("hidden");
-  $("#app").classList.remove("hidden");
-  renderAll();
-  const requestedView = new URLSearchParams(location.search).get("view");
-  if (requestedView && document.getElementById(requestedView)) switchView(requestedView);
+if ("speechSynthesis" in window) {
+  refreshVoices();
+  window.speechSynthesis.onvoiceschanged = () => {
+    refreshVoices();
+    if (!$("#app").classList.contains("hidden")) {
+      const panel = $("#detailPanel");
+      if (panel?.innerHTML) renderDictionary(activeWordId);
+    }
+  };
 }
+
+async function boot() {
+  let hasSupabaseSession = false;
+  if (supabaseClient) {
+    const { data } = await supabaseClient.auth.getSession();
+    if (data?.session?.user?.email) {
+      authMode = "supabase";
+      hasSupabaseSession = true;
+      user = accountNameFromEmail(data.session.user.email);
+      localStorage.setItem("wordforge-user", user);
+    } else {
+      localStorage.removeItem("wordforge-user");
+      user = "";
+    }
+  }
+  if (user && ((supabaseClient && hasSupabaseSession) || (!supabaseClient && AUTH[user]))) {
+    loadState();
+    $("#login").classList.add("hidden");
+    $("#app").classList.remove("hidden");
+    renderAll();
+    const requestedView = new URLSearchParams(location.search).get("view");
+    if (requestedView && document.getElementById(requestedView)) switchView(requestedView);
+  }
+}
+
+boot();

@@ -5,5 +5,5 @@
 window.WORDFORGE_SUPABASE = {
   url: "https://YOUR_PROJECT.supabase.co",
   anonKey: "YOUR_ANON_PUBLIC_KEY",
-  emailDomain: "wordforge.local"
+  emailDomain: "wordforge.example.com"
 };

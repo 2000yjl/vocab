@@ -14,7 +14,9 @@ teacher / 123456
 需要接 Supabase Auth。
 1. 注册 Supabase 并创建 Project。
 2. 打开 Auth，启用 Email/Password。
-3. 关闭 Email Confirmations，方便 001@wordforge.local 这类内部账号登录。
+3. 必须关闭 Email Confirmations / Confirm email。
+   路径：Authentication > Providers > Email > Confirm email。
+   关闭后，001@wordforge.example.com 这类内部账号才能首次登录时自动创建。
 4. 把 supabase-config.example.js 复制为 supabase-config.js，填入 Project URL 和 anon public key。
 5. 如果要批量预置 001-300，需要在 Supabase 后台创建用户或使用 service role 脚本。
 

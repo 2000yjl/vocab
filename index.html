@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>WordForge 终极实用英语词典</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -11,19 +12,19 @@
       <div class="cover-stage">
         <article class="hero-book">
           <span>WordForge</span>
-          <strong>终极实用英语词典</strong>
-          <small>CET · TOEIC · TOEFL · IELTS · Business · Daily</small>
+          <strong>英语词汇大师课</strong>
+          <small>听 · 记 · 用 · 测 · 复习</small>
         </article>
       </div>
       <form id="loginForm" class="login-panel">
-        <p class="eyebrow">像一本会说话、会复习、会跳转的词典</p>
-        <h1>从考试词汇到真实表达，一次整理清楚。</h1>
-        <p class="lead">书架分库、翻页学习、词根派生、短语范例、美音/英音朗读、衍生词跳转、错题复现和拼写训练都在这里。</p>
+        <p class="eyebrow">一套真正拿来学、拿来用的英语词汇课</p>
+        <h1>打开一本词典，养成一种英语能力。</h1>
+        <p class="lead">从四级六级到托福雅思，从商务邮件到日常表达，把单词、短语、发音、例句和复习路线放进同一套体验里。</p>
         <label>账号 <input id="username" autocomplete="username" placeholder="teacher 或 001" /></label>
         <label>密码 <input id="password" type="password" autocomplete="current-password" placeholder="默认 123456" /></label>
         <button class="primary" type="submit">进入词典</button>
         <p id="loginError" class="error"></p>
-        <p class="hint">默认账号：teacher、001-300；默认密码均为 123456。真正全网同步密码需要接 Supabase Auth。</p>
+        <p class="hint">账号由课程管理员分发。</p>
       </form>
     </section>
 
@@ -31,7 +32,7 @@
       <header class="topbar">
         <div class="brand-block">
           <span>WordForge</span>
-          <strong>终极实用英语词典</strong>
+          <strong>英语词汇大师课</strong>
         </div>
         <nav class="tabs" aria-label="学习模式">
           <button class="tab active" data-view="shelf">书架</button>
@@ -46,9 +47,13 @@
       <section id="shelf" class="view active">
         <div class="intro">
           <div>
-            <p class="eyebrow">选择一本词典开始</p>
-            <h2>不再一行四个乱卡片，而是按目标进入一本书。</h2>
-            <p class="lead">每本词典都有自己的封面、用途、排序和学习路径。点击封面会进入翻页模式，从第一个词开始。</p>
+            <p class="eyebrow">今日词汇书架</p>
+            <h2>选一本，翻开第一页，今天就多掌握一组表达。</h2>
+            <p class="lead">考试、商务、旅行、写作和真实生活按目标分库。每个词都能听、能看例句、能跳转派生词，也能进入复习队列。</p>
+            <div class="hero-actions">
+              <button id="continueBtn" class="primary" type="button">继续今天的学习</button>
+              <button id="reviewBtn" class="ghost" type="button">复习错题</button>
+            </div>
           </div>
           <div class="stats">
             <span>词条 <strong id="totalCount">0</strong></span>
@@ -57,6 +62,7 @@
             <span>连胜 <strong id="streakCount">0</strong></span>
           </div>
         </div>
+        <div id="dailyPlan" class="daily-plan"></div>
         <div id="deckShelf" class="deck-shelf"></div>
       </section>
 
@@ -123,11 +129,13 @@
           <label>新密码 <input id="newPassword" type="password" autocomplete="new-password" placeholder="至少 4 位" /></label>
           <button id="saveAccountBtn" class="primary" type="button">保存设置</button>
           <p id="accountFeedback" class="feedback"></p>
-          <p class="hint">当前版本的自定义账号保存在本机浏览器。要跨设备同步改密码，请提供 Supabase Project URL 和 anon public key 后接入真正认证。</p>
+          <p class="hint">改密码后，其他设备会使用新密码登录。</p>
         </div>
       </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-config.js"></script>
     <script src="./data.js"></script>
     <script src="./app.js"></script>
   </body>
