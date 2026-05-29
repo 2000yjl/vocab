@@ -75,7 +75,8 @@ function normalize(value) {
 
 function getWord(id) { return words.find((word) => word.id === Number(id)) || words[0]; }
 function findWordByText(text) { return words.find((word) => normalize(word.word) === normalize(text)); }
-function deckWords(deckId = activeDeck) { return words.filter((word) => word.deckId === deckId); }
+function studyWords() { return words.filter((word) => word.type === "headword"); }
+function deckWords(deckId = activeDeck) { return studyWords().filter((word) => word.deckId === deckId); }
 
 function sortedDeckWords(deckId = activeDeck) {
   const list = deckWords(deckId);
@@ -149,9 +150,10 @@ async function loginWithSupabase(name, pass) {
 }
 
 function renderStats() {
-  $("#totalCount").textContent = words.length;
-  $("#knownCount").textContent = words.filter((word) => (state[word.id]?.right || 0) >= 2).length;
-  $("#dueCount").textContent = words.filter((word) => (state[word.id]?.wrong || 0) > (state[word.id]?.right || 0)).length;
+  const main = studyWords();
+  $("#totalCount").textContent = main.length;
+  $("#knownCount").textContent = main.filter((word) => (state[word.id]?.right || 0) >= 2).length;
+  $("#dueCount").textContent = main.filter((word) => (state[word.id]?.wrong || 0) > (state[word.id]?.right || 0)).length;
   $("#streakCount").textContent = streak;
 }
 
@@ -159,12 +161,12 @@ function renderDailyPlan() {
   const holder = $("#dailyPlan");
   if (!holder) return;
   const deck = recommendedDeck();
-  const due = words.filter((word) => (state[word.id]?.wrong || 0) > (state[word.id]?.right || 0)).length;
+  const due = studyWords().filter((word) => (state[word.id]?.wrong || 0) > (state[word.id]?.right || 0)).length;
   holder.innerHTML = `
     <button class="daily-card" data-action="continue">
       <small>今日 20 分钟</small>
       <strong>${escapeHtml(deck.title)}</strong>
-      <span>从掌握率最低的一本开始，先学 8 个，再复习 12 个。</span>
+          <span>从掌握率最低的一本开始，先学主单词，再看短语和衍生旁支。</span>
     </button>
     <button class="daily-card" data-action="sound">
       <small>听读训练</small>
@@ -197,7 +199,7 @@ function renderShelf() {
           <p>${escapeHtml(deck.desc)}</p>
         </div>
         <div>
-          <p>${total} 个词条 · 掌握 ${progress}%</p>
+          <p>${total} 个主单词 · 掌握 ${progress}%</p>
           <span class="deck-progress"><i style="width:${progress}%"></i></span>
         </div>
       </button>
@@ -366,7 +368,7 @@ function openWord(id) {
 function filteredWords() {
   const deck = $("#deckFilter").value;
   const q = normalize($("#searchBox").value);
-  return words.filter((word) => {
+  return studyWords().filter((word) => {
     const inDeck = deck === "all" || word.deckId === deck;
     const hay = normalize(`${word.word} ${word.cn} ${word.root} ${word.phrases.join(" ")} ${word.family.join(" ")}`);
     return inDeck && (!q || hay.includes(q));
@@ -375,7 +377,8 @@ function filteredWords() {
 
 function renderDictionary(selectedId = activeWordId) {
   const list = filteredWords();
-  const selected = list.find((word) => word.id === selectedId) || list[0] || words[0];
+  const direct = selectedId ? getWord(selectedId) : null;
+  const selected = list.find((word) => word.id === selectedId) || (direct && direct.id === Number(selectedId) ? direct : null) || list[0] || studyWords()[0] || words[0];
   activeWordId = selected.id;
   $("#resultMeta").textContent = `${list.length} 个结果`;
   $("#wordList").innerHTML = list.map((word) => `
@@ -390,16 +393,17 @@ function renderDictionary(selectedId = activeWordId) {
 }
 
 function quizPool() {
-  return [...words].sort((a, b) => wordScore(b) - wordScore(a));
+  return [...studyWords()].sort((a, b) => wordScore(b) - wordScore(a));
 }
 
 function renderQuiz() {
-  const word = quizPool()[quizIndex % words.length];
+  const pool = quizPool();
+  const word = pool[quizIndex % pool.length];
   activeWordId = word.id;
   answerShown = false;
   $("#practiceMode").textContent = quizMode === "spell" ? "拼写输出" : "主动回忆";
   $("#quizPrompt").textContent = word.cn;
-  $("#quizMeta").textContent = `${word.deckTitle} · ${word.root} · ${word.type === "derived" ? "派生词" : "核心词"}`;
+  $("#quizMeta").textContent = `${word.deckTitle} · 主单词`;
   $("#quizAnswer").innerHTML = detailHtml(word);
   bindDetailLinks($("#quizAnswer"));
   $("#quizAnswer").classList.add("hidden");
