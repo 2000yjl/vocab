@@ -289,10 +289,17 @@ function detailHtml(word) {
       <span>${escapeHtml(phrase.cn)}</span>
     </div>
   `).join("");
-  const memoryTitle = word.root === "chunking" ? "记忆方法" : "词根/构词";
-  const memoryBody = word.root === "chunking"
-    ? `<p>${escapeHtml(word.memory)}</p>`
-    : `<p><strong>${escapeHtml(word.root)}</strong>：${escapeHtml(rootExplanation(word.root))}</p><p>${escapeHtml(word.memory)}</p>`;
+  const morphemeRows = (word.morphemes || []).map((item) => `
+    <div class="morpheme">
+      <b>${escapeHtml(item.part)}</b>
+      <span>${escapeHtml(item.role)} · ${escapeHtml(item.meaning)}</span>
+    </div>
+  `).join("");
+  const memoryTitle = "构词记忆";
+  const rootNote = word.root !== "chunking" && rootExplanation(word.root)
+    ? `<p><strong>${escapeHtml(word.root)}</strong>：${escapeHtml(rootExplanation(word.root))}</p>`
+    : "";
+  const memoryBody = `${morphemeRows ? `<div class="morpheme-list">${morphemeRows}</div>` : ""}${rootNote}<p>${escapeHtml(word.memory)}</p>`;
   return `
     <div class="word-head">
       <div>

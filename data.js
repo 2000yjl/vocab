@@ -85,6 +85,18 @@ DECK_SOURCES.push({
   words: "abroad:在国外,absence:缺席,absolute:绝对的,absorb:吸收,abuse:滥用,accent:口音,acceptable:可接受的,accompany:陪伴,accomplish:完成,accountant:会计,accuse:指责,accustomed:习惯的,acid:酸,acre:英亩,addition:增加,additional:额外的,adequately:充分地,adjustment:调整,admire:钦佩,admission:准入,adolescent:青少年,advance:前进/进步,advanced:高级的,advertise:做广告,advertisement:广告,affair:事务,affection:喜爱,afterward:后来,agent:代理人,agriculture:农业,airline:航空公司,alarm:警报,album:相册/专辑,alcohol:酒精,alert:警觉的,alike:相似的,alive:活着的,alongside:在旁边,alter:改变,altogether:总共,ambition:雄心,ancient:古代的,anger:愤怒,angle:角度,anniversary:周年纪念,annual:年度的,anxiously:焦急地,apartment:公寓,apology:道歉,appeal:吸引/呼吁,appearance:外貌,appetite:胃口,applaud:鼓掌,appointment:预约,appreciate:感激/欣赏,approximately:大约,architect:建筑师,argument:争论,arise:出现,arrangement:安排,arrival:到达,arrow:箭,ashamed:羞愧的,aside:在旁边,aspect:方面,assist:帮助,assistant:助手,association:协会,astonish:使惊讶,atmosphere:气氛,attach:附上,attempt:尝试,attend:参加,attitude:态度,attract:吸引,attractive:有吸引力的,automatic:自动的,available:可获得的,avenue:大道,award:奖项,aware:意识到的,awkward:尴尬的,baggage:行李,balanced:平衡的,barrier:障碍,basis:基础,battle:战斗,bean:豆,behalf:代表,belief:信念,bend:弯曲,beneath:在下方,beside:在旁边,betray:背叛,bitter:苦的,blame:责备,blank:空白的,bleed:流血,bless:祝福,blind:盲的,block:阻塞,boil:煮沸,bold:大胆的,border:边界,bother:打扰,bounce:弹起,boundary:边界,brave:勇敢的,breath:呼吸,breathe:呼吸,brick:砖,briefly:简短地,brilliant:杰出的,broadcast:广播,bunch:一束/一群,burden:负担,bury:埋葬,cabin:小屋,cable:电缆,calculate:计算,calm:平静的,cancel:取消,candidate:候选人,cap:帽子,capable:有能力的,capital:首都/资本,career:职业,carpet:地毯,carve:雕刻,casual:随意的,category:类别,ceiling:天花板,celebrate:庆祝,ceremony:仪式,certificate:证书,chain:链条,chairman:主席,challenging:有挑战性的,champion:冠军,channel:频道/渠道,chapter:章节,characteristic:特征,charm:魅力,chemical:化学的,chief:主要的/首领,childhood:童年,cigarette:香烟,circumstance:情况,classic:经典的,clerk:职员,client:客户,cliff:悬崖,clinic:诊所,clue:线索,coach:教练,coal:煤,coast:海岸,collapse:倒塌/崩溃,collar:衣领,collection:收藏,combine:结合,comfort:安慰,command:命令,commercial:商业的,commit:承诺/犯错,committee:委员会,communicate:沟通,comparison:比较,compete:竞争,complain:抱怨,complexity:复杂性,component:组成部分,compose:组成/创作,concentrate:集中,concept:概念,conclude:得出结论,confidently:自信地,conflict:冲突,confuse:使困惑,conscious:有意识的,consequence:结果,considerably:相当地,consist:由……组成,constant:持续的,construction:建设,consult:咨询,consumer:消费者,contain:包含,content:内容,continuous:连续的,contract:合同,contrast:对比,convenience:便利,convince:说服,cooperate:合作,cope:应对,core:核心,corporation:公司,correctly:正确地,cottage:小屋,council:委员会,county:县,courage:勇气,craft:手艺,crash:碰撞,creature:生物,criminal:罪犯,critic:评论家,crop:农作物,crossing:十字路口,cruel:残酷的,currency:货币,custom:习俗,cycle:循环,daily:每日的,dairy:乳制品,deadline:截止日期,deaf:聋的,debate:辩论,debt:债务,decade:十年,declare:宣布,decorate:装饰,decrease:减少,defeat:击败,defend:防御,delight:高兴,democracy:民主,demonstrate:展示/证明,dense:密集的,deny:否认,departure:离开,dependent:依赖的,deposit:押金,desert:沙漠,desire:渴望,desperate:绝望的,device:设备,devote:奉献,diagram:图表,differ:不同,dignity:尊严,directly:直接地,director:导演/主管,disability:残疾,disappear:消失,disappoint:使失望,disaster:灾难,discipline:纪律/学科,discount:折扣,display:展示,distant:遥远的,distinct:明显不同的,disturb:打扰,divide:分开,document:文件,domestic:国内的,donate:捐赠,dramatically:显著地,drawer:抽屉,due:到期的,dust:灰尘,duty:职责,eager:渴望的,earn:赚得,eastern:东方的,economics:经济学,editor:编辑,educate:教育,efficiently:高效地,elder:年长者,electric:电的,elegant:优雅的,elementary:初级的,embarrass:使尴尬,emotional:情绪的,emphasize:强调,enable:使能够,encounter:遇到,ending:结尾,endless:无尽的,engaged:忙于/订婚的,engineer:工程师,enormous:巨大的,ensure:确保,entertain:娱乐,entrance:入口,entry:进入/条目,envelope:信封,episode:一集/事件,equal:平等的,equipment:设备,escape:逃脱,essay:文章,essential:必要的,establish:建立,estimate:估计,ethical:伦理的,evaluate:评估,eventually:最终,evidence:证据,evil:邪恶的,evolution:进化,examine:检查,exchange:交换,excitement:兴奋,existence:存在,expand:扩大,expense:费用,experiment:实验,explode:爆炸,explore:探索,export:出口,exposure:暴露,extend:延伸,extraordinary:非凡的,facility:设施,faith:信任/信仰,familiar:熟悉的,fantastic:极好的,fare:票价,fascinate:使着迷,fashion:时尚,fault:错误,feather:羽毛,feature:特征/功能,federal:联邦的,fee:费用,fellow:同伴,fence:栅栏,festival:节日,fiction:小说,finance:金融,finding:发现,firm:公司/坚定的,flame:火焰,flash:闪光,flavor:味道,flexible:灵活的,float:漂浮,fold:折叠,folk:民间的,forecast:预测,forever:永远,formal:正式的,formerly:以前,fortunate:幸运的,founder:创始人,freeze:冻结,frequent:频繁的,friendship:友谊,frighten:使害怕,fuel:燃料,function:功能,gain:获得,gap:差距,garage:车库,gather:聚集,gene:基因,genuine:真正的,gesture:手势,global:全球的,glory:荣耀,govern:统治,gradually:逐渐地,grain:谷物,grand:宏大的,grant:授予,grateful:感激的,gravity:重力,grocery:杂货,guarantee:保证,guidance:指导,guilty:内疚的,habit:习惯,handle:处理,harbor:港口,hardly:几乎不,harmful:有害的,harvest:收获,hesitate:犹豫,highlight:突出,historical:历史的,hollow:空的,household:家庭的,humor:幽默,ideal:理想的,identity:身份,ignore:忽视,illegal:非法的,illustrate:说明,immediate:立即的,immigrant:移民,impact:影响,import:进口,impress:留下印象,income:收入,indeed:确实,independent:独立的,index:索引,indicate:表明,individual:个人,industrial:工业的,informal:非正式的,ingredient:原料,initial:最初的,injury:伤害,inner:内部的,innocent:无辜的,inquiry:询问,insist:坚持,instant:瞬间,institute:机构,instruction:说明,insurance:保险,intellectual:知识分子/智力的,intense:强烈的,intention:意图,internal:内部的,interpret:解释,interrupt:打断,interval:间隔,investigate:调查,involve:涉及,issue:问题/发布,journal:期刊,judge:判断,junior:初级的,justice:正义,keen:热衷的,knee:膝盖,knowledgeable:知识渊博的,label:标签,labor:劳动,laboratory:实验室,lack:缺乏,landscape:风景,lately:最近,launch:发起/发射,layer:层,leading:领先的,leather:皮革,lecture:讲座,legal:法律的,leisure:休闲,lend:借出,length:长度,liberty:自由,lifetime:一生,likely:可能的,limit:限制,literature:文学,load:负载,loan:贷款,location:位置,logical:合乎逻辑的,loyal:忠诚的,maintain:维持,majority:大多数,manufacture:制造,margin:边缘/利润,marine:海洋的,marriage:婚姻,massive:巨大的,master:掌握/大师,maximum:最大值,meanwhile:与此同时,measure:测量,mechanical:机械的,medicine:药,mental:心理的,merchant:商人,merely:仅仅,merit:优点,minority:少数,mission:任务,mixture:混合物,moderate:适度的,monitor:监控,moral:道德的,moreover:此外,motion:运动,motivate:激励,mountainous:多山的,multiply:乘,mutual:相互的,narrow:狭窄的,native:本地的,necessity:必要性,negotiate:谈判,nevertheless:然而,nod:点头,nominate:提名,normal:正常的,notion:概念,novel:小说/新颖的,nuclear:核的,numerous:许多的,obey:服从,object:物体/反对,obligation:义务,observe:观察,obtain:获得,occasion:场合,occupy:占据,occur:发生,odd:奇怪的,offense:冒犯/罪行,operate:操作,opponent:对手,oppose:反对,optimistic:乐观的,orbit:轨道,ordinary:普通的,organ:器官,origin:起源,otherwise:否则,outcome:结果,outline:提纲,output:输出,overall:总体的,overcome:克服,overlook:忽视,ownership:所有权,pace:步速,package:包裹,painful:痛苦的,panic:恐慌,participation:参与,partly:部分地,passage:段落,passenger:乘客,passion:热情,patience:耐心,peaceful:和平的,penalty:惩罚,perceive:感知,percentage:百分比,performance:表现,permanent:永久的,permission:许可,personally:亲自,phenomenon:现象,philosophy:哲学,phrase:短语,physical:身体的,planet:行星,platform:平台,pleasant:愉快的,plenty:大量,plot:情节,poetry:诗歌,political:政治的,politician:政治家,pollution:污染,popularity:流行,portion:部分,portrait:肖像,possess:拥有,poverty:贫困,practical:实用的,precious:珍贵的,precise:精确的,predict:预测,preference:偏好,pregnant:怀孕的,preparation:准备,pretend:假装,previously:以前,principle:原则,priority:优先事项,procedure:程序,profession:职业,profit:利润,progress:进步,prohibit:禁止,promise:承诺,promote:促进,proof:证明,proper:合适的,proposal:提案,prospect:前景,protest:抗议,psychology:心理学,purchase:购买,pure:纯粹的,qualify:使合格,quantity:数量,quarter:四分之一,rare:稀有的,react:反应,reasonable:合理的,recall:回忆,receipt:收据,recover:恢复,reduce:减少,reference:参考,reflect:反映,refuse:拒绝,regard:认为/尊重,region:地区,regular:规则的,release:释放/发布,relevant:相关的,reliable:可靠的,relief:缓解,remote:遥远的,remove:移除,repair:修理,replace:替换,represent:代表,reputation:名声,require:要求,researcher:研究者,reserve:保留/预订,resident:居民,resist:抵抗,resource:资源,respond:回应,restore:恢复,restrict:限制,retain:保留,reveal:揭示,revenue:收入,reverse:逆转,reward:奖励,rough:粗糙的,routine:常规,ruin:毁坏,rural:农村的,salary:工资,satellite:卫星,satisfy:满足,scale:规模/刻度,scarce:稀缺的,scenario:情景,schedule:日程,scholar:学者,scientific:科学的,secure:安全的,seek:寻找,select:选择,senior:高级的,sequence:顺序,session:会议/一节课,severe:严重的,shallow:浅的,shelter:庇护所,shift:转移,shortage:短缺,significant:显著的,silence:沉默,similarity:相似性,simply:仅仅,site:地点/网站,slight:轻微的,software:软件,solid:坚固的,somehow:不知何故,specific:具体的,spirit:精神,stable:稳定的,statue:雕像,steady:稳定的,stimulate:刺激,strategy:策略,strength:力量,strict:严格的,structure:结构,struggle:奋斗,substance:物质,substantial:大量的,suffer:遭受,sufficient:足够的,summarize:总结,supply:供应,supportive:支持的,surface:表面,survive:生存,suspect:怀疑,sustain:维持,swallow:吞下,sympathy:同情,talent:才能,technical:技术的,temporary:暂时的,therefore:因此,threat:威胁,throughout:贯穿,tight:紧的,tolerate:忍受,topic:话题,tradition:传统,transfer:转移,translate:翻译,transport:运输,trend:趋势,trial:试验/审判,typically:通常地,ultimate:最终的,unable:不能的,uncertain:不确定的,undergo:经历,unique:独特的,universe:宇宙,urban:城市的,urgent:紧急的,valuable:有价值的,variation:变化,variety:多样性,various:各种各样的,vehicle:车辆,venture:冒险事业,version:版本,victim:受害者,violence:暴力,visible:可见的,vision:视力/愿景,visual:视觉的,volume:音量/卷,volunteer:志愿者,wealth:财富,whereas:然而,widespread:广泛的,willing:愿意的,wisdom:智慧,witness:目击者,worship:崇拜,youth:青年"
 });
 
+const SUPPLEMENTAL_DECK_WORDS = {
+  cet4: "accident:事故,activity:活动,adult:成年人,advice:建议,agree:同意,airport:机场,allow:允许,alone:独自,animal:动物,answer:回答,apartment:公寓,apple:苹果,area:地区,article:文章,attention:注意,bag:包,basic:基础的,because:因为,before:以前,begin:开始,behind:在后面,believe:相信,bicycle:自行车,biology:生物学,borrow:借入,bottle:瓶子,break:打破,bridge:桥,business:商业,careful:小心的,carry:携带,central:中心的,cheap:便宜的,choice:选择,clean:干净的,climb:攀登,collect:收集,common:常见的,complete:完成,computer:电脑,continue:继续,correct:正确的,cost:花费,course:课程,cover:覆盖,crowd:人群,danger:危险,dark:黑暗的,deal:处理,deep:深的,different:不同的,difficult:困难的,direction:方向,doctor:医生,draw:画,driver:司机,during:在……期间,early:早的,easy:容易的,either:任一,empty:空的,enjoy:享受,enough:足够,enter:进入,exam:考试,example:例子,excited:兴奋的,exercise:练习,expensive:昂贵的,famous:著名的,farmer:农民,favorite:最喜欢的,festival:节日,finish:完成,foreign:外国的,forget:忘记,friendly:友好的,garden:花园,grade:年级,habit:习惯,half:一半,healthy:健康的,history:历史,holiday:假期,hospital:医院,hungry:饥饿的,important:重要的,inside:在里面,interest:兴趣,Internet:互联网,invite:邀请,journey:旅程,kitchen:厨房,language:语言,library:图书馆,local:当地的,lovely:可爱的,market:市场,medicine:药,meeting:会议,message:消息,middle:中间的,mistake:错误,modern:现代的,music:音乐,necessary:必要的,nervous:紧张的,noise:噪音,notice:通知/注意,office:办公室,opinion:观点,ordinary:普通的,outside:外面,patient:病人/耐心的,picture:图片,planet:行星,possible:可能的,practice:练习,present:现在/礼物,price:价格,problem:问题,program:节目/程序,protect:保护,provide:提供,public:公共的,purpose:目的,quickly:快速地,quiet:安静的,realize:意识到,receive:收到,record:记录,remember:记得,repair:修理,report:报告,return:返回,review:复习,season:季节,secret:秘密,service:服务,several:几个,share:分享,simple:简单的,situation:情况,society:社会,special:特别的,station:车站,straight:直的,strange:奇怪的,success:成功,suggest:建议,surprise:惊喜,together:一起,tomorrow:明天,traffic:交通,trouble:麻烦,useful:有用的,village:村庄,visitor:访客,weather:天气,without:没有,wonderful:精彩的",
+  cet6: "abandonment:放弃,absurd:荒谬的,abundance:丰富,accelerate:加速,accessible:可接近的,accordingly:因此,accumulate:积累,accuracy:准确性,acknowledge:承认,adaptation:适应,administration:管理,advocate:提倡,agenda:议程,aggressive:有攻击性的,allege:声称,ambition:抱负,analogy:类比,anonymous:匿名的,appreciate:欣赏/感激,arbitrary:任意的,assemble:集合/组装,assert:断言,asset:资产,assign:分配,associate:联系,attain:获得,attribute:归因于,authentic:真实的,barrier:障碍,capable:有能力的,characteristic:特征,circumstance:情况,clarity:清晰,coincide:同时发生,collapse:崩溃,colleague:同事,collective:集体的,commitment:承诺,commodity:商品,compatible:兼容的,compel:迫使,compete:竞争,complexity:复杂性,complicated:复杂的,comprise:包括,conceive:设想,conclude:得出结论,conform:遵守,confront:面对,conserve:保护/节约,constant:持续的,consult:咨询,context:语境,contrary:相反的,contribute:贡献,conventional:传统的,cooperate:合作,corporate:公司的,correlate:相关,crisis:危机,criticize:批评,cultivate:培养,dedicate:奉献,deficiency:不足,define:定义,demonstrate:证明/展示,denote:表示,depression:抑郁/萧条,deserve:值得,determine:决定,differentiate:区分,diminish:减少,discipline:学科/纪律,dispose:处理,distinctive:独特的,distinguish:区分,diversity:多样性,dominate:支配,durable:耐用的,eliminate:消除,empirical:实证的,encounter:遇到,endeavor:努力,engage:参与,enormous:巨大的,ensure:确保,ethical:伦理的,evolution:进化,exaggerate:夸大,exceed:超过,exception:例外,excessive:过度的,exhibit:展示,explicit:明确的,exploit:利用,external:外部的,feasible:可行的,fluctuate:波动,fragment:碎片,frequency:频率,frustrate:使沮丧,functional:功能性的,fundamental:根本的,gradual:逐渐的,guarantee:保证,hostile:敌对的,ideology:意识形态,illustrate:说明,immense:巨大的,implicit:含蓄的,imply:暗示,impose:强加,incentive:激励,inevitable:不可避免的,infer:推断,innovation:创新,insight:洞察,integral:不可或缺的,internal:内部的,intervention:干预,intrinsic:内在的,isolate:隔离,justify:证明合理,legitimate:合法的,liberal:自由的,logic:逻辑,manipulate:操纵,mature:成熟的,maximize:最大化,modify:修改,motive:动机,mutual:相互的,neglect:忽视,neutral:中立的,notion:概念,obligation:义务,occupy:占据,occur:发生,oppose:反对,optimistic:乐观的,outcome:结果,overall:总体的,paradox:悖论,parallel:平行的,parameter:参数,perceive:感知,persist:坚持,pose:造成/提出,precede:先于,preserve:保存,presume:假定,prevail:盛行,proceed:继续,prohibit:禁止,proportion:比例,prospect:前景,pursue:追求,radical:激进的,rational:理性的,recognize:认出/承认,refine:改进,reinforce:加强,reluctant:不情愿的,reside:居住,retain:保留,reveal:揭示,reverse:逆转,revise:修改,rigid:僵硬的,scenario:情景,sequence:顺序,simultaneously:同时,solely:仅仅,specify:具体说明,stimulate:刺激,substitute:替代,sufficient:足够的,supplement:补充,symbolic:象征性的,temporary:暂时的,tension:紧张,terminate:终止,thereby:因此,transition:过渡,trigger:触发,undergo:经历,undertake:承担,uniform:统一的,valid:有效的,vary:变化,violate:违反,voluntary:自愿的,widespread:广泛的",
+  toefl: "archaeology:考古学,artifact:人工制品,astronomy:天文学,atmospheric:大气的,biodiversity:生物多样性,carbon:碳,cell:细胞,clay:黏土,climate:气候,colony:群体/殖民地,comet:彗星,crust:地壳,decay:腐烂/衰退,deforestation:森林砍伐,deposit:沉积物,ecosystem:生态系统,emission:排放,erosion:侵蚀,evaporation:蒸发,fossil:化石,galaxy:星系,genetic:遗传的,glacier:冰川,gravity:重力,herbivore:食草动物,indigenous:本土的,insulate:隔热,isotope:同位素,larva:幼虫,lava:熔岩,mammal:哺乳动物,marine:海洋的,mineral:矿物,molecule:分子,nutrient:营养物,orbit:轨道,organism:有机体,oxygen:氧气,particle:粒子,pollination:授粉,predator:捕食者,prehistoric:史前的,protein:蛋白质,radiation:辐射,reproduction:繁殖,sediment:沉积物,solar:太阳的,species:物种,tectonic:构造的,territory:领地,thermal:热的,tissue:组织,volcano:火山,watershed:流域",
+  ielts: "achievement:成就,advertising:广告,agriculture:农业,animal:动物,architecture:建筑,automation:自动化,biodiversity:生物多样性,childcare:儿童照护,citizenship:公民身份,consumerism:消费主义,creativity:创造力,curriculum:课程,demographic:人口统计的,diet:饮食,digital:数字的,discipline:纪律,diversity:多样性,equality:平等,expenditure:支出,facility:设施,gender:性别,generation:一代,heritage:遗产,homelessness:无家可归,immigration:移民,inequality:不平等,innovation:创新,investment:投资,leisure:休闲,minority:少数群体,mobility:流动性,multicultural:多元文化的,neighborhood:社区,nutrition:营养,overcrowding:过度拥挤,parenting:育儿,pedestrian:行人,productivity:生产力,renewable:可再生的,retirement:退休,sanitation:卫生设施,shortage:短缺,subsidy:补贴,tourism:旅游业,unemployment:失业,wildlife:野生动物",
+  toeic: "accounting:会计,acquisition:收购,advertisement:广告,appliance:电器,attendance:出勤,authorize:授权,beverage:饮料,brochure:宣传册,bulk:大批量,commute:通勤,compensation:补偿,complaint:投诉,consultant:顾问,coordinator:协调员,corporation:公司,customize:定制,defective:有缺陷的,delivery:配送,demonstration:演示,distributor:经销商,extension:延期/分机,facility:设施,forecast:预测,franchise:特许经营,fulfill:履行,handbook:手册,inspection:检查,installation:安装,interview:面试,maintenance:维护,merchandise:商品,merger:合并,opening:职位空缺,outlet:门店,overtime:加班,packaging:包装,personnel:人事,quotation:报价,reimbursement:报销,relocate:搬迁,renovation:翻新,retailer:零售商,review:评审,seminar:研讨会,supervisor:主管,tenant:租户,training:培训,venue:场地,warehouse:仓库"
+};
+
+SUPPLEMENTAL_DECK_WORDS.toefl += ",adaptation:适应,agricultural:农业的,amphibian:两栖动物,anatomy:解剖学,annual:年度的,aquatic:水生的,arid:干旱的,bacteria:细菌,behavioral:行为的,breed:繁殖,burrow:洞穴,canopy:树冠层,carnivore:食肉动物,civilization:文明,cluster:群,coastal:沿海的,compensate:补偿,competition:竞争,conservation:保护,continental:大陆的,coral:珊瑚,crater:火山口,crevice:裂缝,crustacean:甲壳动物,crystalline:结晶的,cycle:循环,decompose:分解,density:密度,desertification:荒漠化,diurnal:白天活动的,drought:干旱,ecological:生态的,enzyme:酶,equator:赤道,extinction:灭绝,fauna:动物群,flora:植物群,forage:觅食,formation:形成,fungus:真菌,geological:地质的,germinate:发芽,habitable:适宜居住的,hibernate:冬眠,humidity:湿度,igneous:火成的,impermeable:不透水的,instinct:本能,irrigation:灌溉,limestone:石灰岩,metabolism:新陈代谢,microbe:微生物,migration:迁徙,nocturnal:夜间活动的,nucleus:细胞核,organic:有机的,photosynthesis:光合作用,plankton:浮游生物,precipitation:降水,primate:灵长类动物,reef:礁,regulate:调节,renewable:可再生的,reptile:爬行动物,residue:残留物,salinity:盐度,savanna:稀树草原,scarcity:稀缺,seismic:地震的,shelter:庇护所,submerge:淹没,symbiosis:共生,temperate:温带的,terrain:地形,terrestrial:陆地的,tidal:潮汐的,vegetation:植被,vertebrate:脊椎动物,vessel:血管/容器,volcanic:火山的";
+SUPPLEMENTAL_DECK_WORDS.ielts += ",affluence:富裕,aging:老龄化,allocation:分配,amenity:便利设施,aspiration:抱负,communal:社区的,congestion:拥堵,conservation:保护,consumption:消费,contamination:污染,deforestation:森林砍伐,dependency:依赖,disposable:一次性的,domestic:家庭的/国内的,emission:排放,endangered:濒危的,entrepreneur:企业家,epidemic:流行病,excessive:过度的,feasible:可行的,financial:金融的,flexibility:灵活性,habitat:栖息地,household:家庭的,hygiene:卫生,illiteracy:文盲,impractical:不实际的,incentive:激励,inclusive:包容的,industrialization:工业化,infrastructure:基础设施,legislation:立法,livelihood:生计,literacy:识字能力,mandatory:强制的,migration:迁移,obesity:肥胖,organic:有机的,participation:参与,pesticide:杀虫剂,prosperity:繁荣,regulation:规定,residential:住宅的,resource:资源,restriction:限制,shortcoming:缺点,spacious:宽敞的,suburban:郊区的,taxation:税收,urbanization:城市化,vocational:职业的";
+SUPPLEMENTAL_DECK_WORDS.toeic += ",accommodate:容纳/满足,adjustment:调整,affiliate:分支机构,announcement:公告,apologize:道歉,appraisal:评估,automated:自动化的,availability:可用性,benefit:福利/好处,bill:账单,booklet:小册子,briefing:简报,carrier:承运人,catalog:目录,caterer:餐饮承办商,clearance:清仓/许可,complimentary:免费的,confirmation:确认,consignment:托运货物,contractor:承包商,convention:大会,coupon:优惠券,credential:资质,deadline:截止日期,delighted:高兴的,departmental:部门的,discounted:打折的,dispatch:派送,documentation:文件,domestic:国内的,eligible:符合条件的,enclosed:随附的,equipment:设备,estimate:估价,executive:高管,expiration:到期,feedback:反馈,headquarters:总部,inquiry:询问,inventory:库存,invoice:发票,itemize:逐项列出,logistics:物流,manufacturer:制造商,membership:会员资格,memo:备忘录,notify:通知,operator:操作员,participant:参与者,postage:邮费,preferred:首选的,procedure:流程,processing:处理,procurement:采购,productivity:生产力,promotional:促销的,punctual:准时的,recipient:收件人,recruitment:招聘,refundable:可退款的,registration:登记,remittance:汇款,representative:代表,reschedule:改期,resume:简历,shipment:装运,signature:签名,subscription:订阅,subsidiary:子公司,survey:调查,temporary:临时的,transaction:交易,verification:验证,warranty:保修";
+
 const ROOT_LIBRARY = [
   { root: "port", meaning: "carry 搬运", method: "transport/import/export/portable 都和搬运、携带、转移有关。", examples: ["transport", "import", "export", "portable"] },
   { root: "struct", meaning: "build 建造", method: "structure 是搭起来的结构，construct 是建造。", examples: ["structure", "construct", "instruction"] },
@@ -96,6 +108,58 @@ const ROOT_LIBRARY = [
   { root: "ject", meaning: "throw 投掷", method: "project 向前投，reject 投回去，object 把意见投出去。", examples: ["project", "object", "subject"] },
   { root: "mit/miss", meaning: "send 送出", method: "submit 送上去，transmit 传过去，permit 允许送行。", examples: ["submit", "transmit", "permit"] },
   { root: "cred", meaning: "believe 相信", method: "credit 来自信任，credible 是可信的。", examples: ["credit", "credible", "credentials"] }
+];
+
+const MORPHEME_PATTERNS = [
+  { key: "alter/altern", re: /alter|altern/, meaning: "other/change 另一、改变", role: "词根" },
+  { key: "nat/native", re: /nat|nativ/, meaning: "born 出生、本来的", role: "词根" },
+  { key: "port", re: /port/, meaning: "carry 搬运、携带", role: "词根" },
+  { key: "struct", re: /struct/, meaning: "build 建造、结构", role: "词根" },
+  { key: "spect", re: /spect/, meaning: "look 看、观察", role: "词根" },
+  { key: "scrib/script", re: /scrib|script/, meaning: "write 写、记录", role: "词根" },
+  { key: "vis/vid", re: /vis|vid/, meaning: "see 看见", role: "词根" },
+  { key: "form", re: /form/, meaning: "shape 形成、形状", role: "词根" },
+  { key: "press", re: /press/, meaning: "push 压、推进", role: "词根" },
+  { key: "ject", re: /ject/, meaning: "throw 投、扔出", role: "词根" },
+  { key: "mit/miss", re: /mit|miss/, meaning: "send 送出、传递", role: "词根" },
+  { key: "cred", re: /cred/, meaning: "believe 相信", role: "词根" },
+  { key: "cap/capt/cept", re: /cap|capt|cept/, meaning: "take/grab 拿取、抓住", role: "词根" },
+  { key: "duc/duct", re: /duc|duct/, meaning: "lead 引导、带领", role: "词根" },
+  { key: "fac/fact/fect", re: /fac|fact|fect/, meaning: "make/do 做、制造", role: "词根" },
+  { key: "fer", re: /fer/, meaning: "carry 带来、携带", role: "词根" },
+  { key: "fin", re: /fin/, meaning: "end/boundary 结束、边界", role: "词根" },
+  { key: "grad/gress", re: /grad|gress/, meaning: "step/go 步、前进", role: "词根" },
+  { key: "graph/gram", re: /graph|gram/, meaning: "write/record 写、记录", role: "词根" },
+  { key: "log", re: /log/, meaning: "word/reason 语言、逻辑", role: "词根" },
+  { key: "man/manu", re: /manu?/, meaning: "hand 手、操作", role: "词根" },
+  { key: "mot/mov/mob", re: /mot|mov|mob/, meaning: "move 移动", role: "词根" },
+  { key: "pel/puls", re: /pel|puls/, meaning: "push/drive 推动", role: "词根" },
+  { key: "pos/pon", re: /pos|pon/, meaning: "put 放置", role: "词根" },
+  { key: "scrib/script", re: /scrib|script/, meaning: "write 写", role: "词根" },
+  { key: "sens/sent", re: /sens|sent/, meaning: "feel 感觉", role: "词根" },
+  { key: "tain/ten/tent", re: /tain|ten|tent/, meaning: "hold 握住、保持", role: "词根" },
+  { key: "tract", re: /tract/, meaning: "pull 拉、引", role: "词根" },
+  { key: "use/ut", re: /use|util|ut/, meaning: "use 使用", role: "词根" }
+];
+
+const PREFIX_PATTERNS = [
+  ["anti", "against 反对"], ["auto", "self 自己/自动"], ["co", "together 共同"], ["com", "together/intensive 共同/加强"],
+  ["con", "together 共同"], ["de", "down/away 向下/去掉"], ["dis", "not/apart 不/分开"], ["en", "make 使……"],
+  ["ex", "out/former 向外/以前"], ["extra", "beyond 额外"], ["fore", "before 预先"], ["im", "not/in 进入/不"],
+  ["in", "in/not 进入/不"], ["inter", "between 相互/之间"], ["mal", "bad 坏"], ["micro", "small 小"],
+  ["mis", "wrong 错误"], ["multi", "many 多"], ["non", "not 不"], ["over", "too much 过度"],
+  ["post", "after 之后"], ["pre", "before 之前"], ["pro", "forward/support 向前/支持"], ["re", "again/back 再/回"],
+  ["sub", "under 下"], ["super", "above 超级/上方"], ["trans", "across/change 跨越/转变"], ["un", "not 不"]
+];
+
+const SUFFIX_PATTERNS = [
+  ["ability", "ability 状态/能力"], ["ibility", "ability 状态/能力"], ["ation", "act/result 动作/结果"], ["ition", "act/result 动作/结果"],
+  ["ative", "having the nature of 具有……性质的"], ["ence", "state 状态"], ["ance", "state 状态"], ["ment", "result/process 结果/过程"],
+  ["ness", "state 状态"], ["ship", "state/skill 身份/关系"], ["ity", "state/quality 性质/状态"], ["ism", "system/belief 主义/体系"],
+  ["ist", "person 人"], ["er", "person/tool 人/工具"], ["or", "person/tool 人/工具"], ["al", "related to 与……有关的"],
+  ["ial", "related to 与……有关的"], ["ic", "related to 与……有关的"], ["ical", "related to 与……有关的"], ["ive", "having tendency 有……倾向的"],
+  ["ous", "full of 充满……的"], ["able", "can be 能被……的"], ["ible", "can be 能被……的"], ["less", "without 没有"],
+  ["ful", "full of 充满"], ["ly", "in a way 以……方式"], ["ize", "make 使成为"], ["ise", "make 使成为"], ["ify", "make 使成为"]
 ];
 
 const MANUAL_FAMILY = {
@@ -140,7 +204,8 @@ const SPECIAL_PHRASES = {
   reservation: ["make a reservation", "confirm a reservation", "reservation number", "cancel a reservation"],
   privacy: ["protect privacy", "privacy policy", "personal privacy", "privacy settings"],
   pressure: ["under pressure", "work pressure", "reduce pressure", "blood pressure"],
-  communicate: ["communicate clearly", "communication skills", "communicate with others", "effective communication"]
+  communicate: ["communicate clearly", "communication skills", "communicate with others", "effective communication"],
+  alternative: ["an alternative approach", "alternative options", "an alternative solution", "a practical alternative"]
 };
 
 const PHRASE_CN = {
@@ -192,7 +257,11 @@ const PHRASE_CN = {
   "under pressure": "在压力下",
   "reduce pressure": "减轻压力",
   "communicate clearly": "清楚沟通",
-  "communication skills": "沟通技能"
+  "communication skills": "沟通技能",
+  "an alternative approach": "另一种方法",
+  "alternative options": "替代选项",
+  "an alternative solution": "替代解决方案",
+  "a practical alternative": "一个实用的替代方案"
 };
 
 const SPECIAL_EXAMPLES = {
@@ -337,6 +406,8 @@ const SPECIAL_MEANINGS = {
 };
 
 function rootFor(word) {
+  if (/alter|altern/.test(word)) return "alter/altern";
+  if (/nativ|nat/.test(word)) return "nat/native";
   if (/port/.test(word)) return "port";
   if (/struct/.test(word)) return "struct";
   if (/spect|perspective/.test(word)) return "spect";
@@ -353,6 +424,31 @@ function rootFor(word) {
   if (word.endsWith("able")) return "-able";
   if (word.endsWith("ity")) return "-ity";
   return "chunking";
+}
+
+function morphemesFor(word) {
+  const clean = String(word || "").toLowerCase().replace(/[^a-z]/g, "");
+  if (!clean) return [];
+  const parts = [];
+  const prefix = PREFIX_PATTERNS
+    .filter(([key]) => clean.startsWith(key) && clean.length > key.length + 3)
+    .sort((a, b) => b[0].length - a[0].length)[0];
+  const suffix = SUFFIX_PATTERNS
+    .filter(([key]) => clean.endsWith(key) && clean.length > key.length + 3)
+    .sort((a, b) => b[0].length - a[0].length)[0];
+  if (prefix) parts.push({ part: prefix[0] + "-", role: "前缀", meaning: prefix[1] });
+  const root = MORPHEME_PATTERNS.find((item) => item.re.test(clean));
+  if (root) parts.push({ part: root.key, role: root.role, meaning: root.meaning });
+  if (suffix) parts.push({ part: "-" + suffix[0], role: "后缀", meaning: suffix[1] });
+  if (!parts.length && clean.length > 7) {
+    const head = clean.slice(0, Math.ceil(clean.length / 2));
+    const tail = clean.slice(Math.ceil(clean.length / 2));
+    return [
+      { part: head, role: "音形块", meaning: "先锁定前半段拼写" },
+      { part: tail, role: "音形块", meaning: "再补全后半段拼写" }
+    ];
+  }
+  return parts;
 }
 
 function phoneticFor(word) {
@@ -406,7 +502,10 @@ function phrasesFor(word, deckId) {
   const verbLike = /^(abandon|achieve|adapt|adjust|affect|analyze|approve|arrange|assume|compare|confirm|consider|create|decline|deliver|describe|develop|explain|focus|improve|include|increase|indicate|allocate|anticipate|cease|collapse|consume|contradict|derive|emerge|enhance|evaluate|exclude|generate|highlight|interpret|maintain|obtain|participate|accumulate|alter|attribute|compensate|conduct|constrain|convert|detect|establish|evolve|extract|facilitate|integrate|monitor|clarify|coordinate|delegate|implement|prioritize|summarize|update|request|reschedule|postpone|resolve|install|delete|download|upload|configure|encrypt|communicate|forgive|encourage|understand|apologize|reduce|decrease|address|tackle)$/.test(word);
   const adjectiveLike = /(able|al|ive|ous|ful|less|ant|ent|ic|ary|ory)$/.test(word) || /^(active|available|average|complex|dense|diverse|domestic|dominant|initial|stable|urban|rural|public|private|essential|vital|minor|major|urgent|flexible|reliable|confident|anxious|curious|patient|honest|upset)$/.test(word);
   if (verbLike) return [`${word} a problem`, `${word} the plan`, `${word} the result`, `${word} carefully`];
-  if (adjectiveLike) return [`a ${word} approach`, `${word} information`, `${word} enough`, `remain ${word}`];
+  if (adjectiveLike) {
+    const article = /^[aeiou]/.test(word) ? "an" : "a";
+    return [`${article} ${word} approach`, `${word} options`, `${article} ${word} solution`, `a more ${word} choice`];
+  }
   const templates = {
     toeic: [`${word} request`, `${word} report`, `confirm the ${word}`, `${word} deadline`],
     business: [`clarify the ${word}`, `${word} update`, `${word} plan`, `${word} meeting`],
@@ -438,8 +537,11 @@ function phraseMeaning(phrase, word, deckId, cn = "") {
   if (phrase === `${word} the plan`) return `${meaning}这个计划`;
   if (phrase === `${word} the result`) return `${meaning}结果`;
   if (phrase === `${word} carefully`) return `仔细地${meaning}`;
-  if (phrase === `a ${word} approach`) return `${meaning}的方法`;
+  if (phrase === `a ${word} approach` || phrase === `an ${word} approach`) return `${meaning}的方法`;
   if (phrase === `${word} information`) return `${meaning}的信息`;
+  if (phrase === `${word} options`) return `${meaning}的选项`;
+  if (phrase === `a ${word} solution` || phrase === `an ${word} solution`) return `${meaning}的解决方案`;
+  if (phrase === `a more ${word} choice`) return `一个更${meaning}的选择`;
   if (phrase === `${word} enough`) return `足够${meaning}`;
   if (phrase === `remain ${word}`) return `保持${meaning}`;
   if (phrase === `the ${word} of the system`) return `系统的${meaning}`;
@@ -471,9 +573,11 @@ function phraseItemsFor(word, deckId, cn = "") {
 }
 
 function memoryFor(word, cn, root) {
-  if (root !== "chunking") return `抓住 ${root} 这条构词线索，再把它和“${cn}”的场景绑定。`;
-  if (word.length <= 6) return `短词用拼写锁定：遮住英文，3 秒内写出 ${word}。`;
-  return `把 ${word} 拆成 2-3 个声音块，先读准，再用“${cn}”造一句自己的话。`;
+  const parts = morphemesFor(word);
+  if (parts.length) {
+    return `先看构词：${parts.map((item) => `${item.part}=${item.meaning.split(" ")[0]}`).join(" + ")}，再把整体意思“${cn}”放进例句里记。`;
+  }
+  return `短词用拼写锁定：遮住英文，3 秒内写出 ${word}，再用“${cn}”造一句自己的话。`;
 }
 
 function exampleFor(word, deckId) {
@@ -524,6 +628,7 @@ function meaningExamplesFor(word, cn, deckId) {
 function registerTextMap(entry) {
   return {
     ...entry,
+    morphemes: entry.morphemes || morphemesFor(entry.word),
     phraseItems: entry.phraseItems || phraseItemsFor(entry.word, entry.deckId, entry.cn),
     meanings: entry.meanings || meaningExamplesFor(entry.word, entry.cn, entry.deckId)
   };
@@ -532,10 +637,16 @@ function registerTextMap(entry) {
 function parseWords() {
   let id = 1;
   const entries = [];
+  const seenHeadwords = new Set();
   for (const deck of DECK_SOURCES) {
-    const pairs = deck.words.split(",");
+    const rawWords = [deck.words, SUPPLEMENTAL_DECK_WORDS[deck.id]].filter(Boolean).join(",");
+    const pairs = rawWords.split(",");
     pairs.forEach((pair, index) => {
       const [word, cn] = pair.split(":");
+      if (!word || !cn) return;
+      const key = `${deck.id}:${word.toLowerCase()}`;
+      if (seenHeadwords.has(key)) return;
+      seenHeadwords.add(key);
       const root = rootFor(word);
       const family = familyFor(word);
       entries.push(registerTextMap({
