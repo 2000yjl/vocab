@@ -60,8 +60,8 @@ const DECK_SOURCES = [
     words: "anxious:焦虑的,attitude:态度,comfort:安慰,confident:自信的,curious:好奇的,decision:决定,emotion:情绪,encourage:鼓励,expectation:期待,forgive:原谅,frustrated:沮丧的,grateful:感激的,honest:诚实的,patient:有耐心的,personality:性格,pressure:压力,reliable:可靠的,relieved:宽慰的,respect:尊重,supportive:支持的,trust:信任,understand:理解,upset:难过的,apologize:道歉,communicate:沟通,relationship:关系,choice:选择,compliment:称赞,argument:争论,empathy:同理心"
   },
   {
-    id: "native", title: "母语者口语词典", tone: "green", order: "真实对话",
-    desc: "把课本词变成自然、地道、不过度正式的英语表达。",
+    id: "native", title: "母语者口语短语库", tone: "green", order: "真实对话",
+    desc: "自然、地道、不过度正式的英语口语块，作为短语库单独学习。",
     words: "catch up:叙旧/赶上,figure out:弄明白,work out:解决/进展顺利,make sense:说得通,come up:出现/被提到,bring up:提起,run into:偶遇/遇到问题,look into:调查,sort out:处理好,hang out:闲逛/一起玩,show up:出现/到场,turn out:结果是,pick up:接人/学会/取东西,drop by:顺路拜访,check in:确认情况/办理入住,follow up:跟进,get back to:回复,reach out:联系,heads up:提前提醒,on the same page:想法一致,no worries:没关系,all set:都准备好了,good to go:可以开始了,not a big deal:没什么大不了,up to you:由你决定,works for me:我可以/对我合适,sounds good:听起来不错,fair enough:也有道理,I mean:我是说,you know:你知道/口语停顿,kind of:有点儿,pretty much:差不多,at some point:找个时候/某个阶段,for now:暂时,so far:到目前为止,right away:马上,in a bit:过一会儿,by the way:顺便说一下,to be honest:说实话,long story short:长话短说,that said:话虽如此,as far as I know:据我所知,I was wondering:我想问一下,would you mind:你介意吗,let me know:告诉我,keep me posted:随时告诉我,I'll take care of it:我来处理,I'm on it:我正在办,I'll pass:我就不了,I'm good:不用了/我可以,can't make it:去不了/赶不上,make it work:想办法搞定"
   },
   {
@@ -96,6 +96,7 @@ const SUPPLEMENTAL_DECK_WORDS = {
 SUPPLEMENTAL_DECK_WORDS.toefl += ",adaptation:适应,agricultural:农业的,amphibian:两栖动物,anatomy:解剖学,annual:年度的,aquatic:水生的,arid:干旱的,bacteria:细菌,behavioral:行为的,breed:繁殖,burrow:洞穴,canopy:树冠层,carnivore:食肉动物,civilization:文明,cluster:群,coastal:沿海的,compensate:补偿,competition:竞争,conservation:保护,continental:大陆的,coral:珊瑚,crater:火山口,crevice:裂缝,crustacean:甲壳动物,crystalline:结晶的,cycle:循环,decompose:分解,density:密度,desertification:荒漠化,diurnal:白天活动的,drought:干旱,ecological:生态的,enzyme:酶,equator:赤道,extinction:灭绝,fauna:动物群,flora:植物群,forage:觅食,formation:形成,fungus:真菌,geological:地质的,germinate:发芽,habitable:适宜居住的,hibernate:冬眠,humidity:湿度,igneous:火成的,impermeable:不透水的,instinct:本能,irrigation:灌溉,limestone:石灰岩,metabolism:新陈代谢,microbe:微生物,migration:迁徙,nocturnal:夜间活动的,nucleus:细胞核,organic:有机的,photosynthesis:光合作用,plankton:浮游生物,precipitation:降水,primate:灵长类动物,reef:礁,regulate:调节,renewable:可再生的,reptile:爬行动物,residue:残留物,salinity:盐度,savanna:稀树草原,scarcity:稀缺,seismic:地震的,shelter:庇护所,submerge:淹没,symbiosis:共生,temperate:温带的,terrain:地形,terrestrial:陆地的,tidal:潮汐的,vegetation:植被,vertebrate:脊椎动物,vessel:血管/容器,volcanic:火山的";
 SUPPLEMENTAL_DECK_WORDS.ielts += ",affluence:富裕,aging:老龄化,allocation:分配,amenity:便利设施,aspiration:抱负,communal:社区的,congestion:拥堵,conservation:保护,consumption:消费,contamination:污染,deforestation:森林砍伐,dependency:依赖,disposable:一次性的,domestic:家庭的/国内的,emission:排放,endangered:濒危的,entrepreneur:企业家,epidemic:流行病,excessive:过度的,feasible:可行的,financial:金融的,flexibility:灵活性,habitat:栖息地,household:家庭的,hygiene:卫生,illiteracy:文盲,impractical:不实际的,incentive:激励,inclusive:包容的,industrialization:工业化,infrastructure:基础设施,legislation:立法,livelihood:生计,literacy:识字能力,mandatory:强制的,migration:迁移,obesity:肥胖,organic:有机的,participation:参与,pesticide:杀虫剂,prosperity:繁荣,regulation:规定,residential:住宅的,resource:资源,restriction:限制,shortcoming:缺点,spacious:宽敞的,suburban:郊区的,taxation:税收,urbanization:城市化,vocational:职业的";
 SUPPLEMENTAL_DECK_WORDS.toeic += ",accommodate:容纳/满足,adjustment:调整,affiliate:分支机构,announcement:公告,apologize:道歉,appraisal:评估,automated:自动化的,availability:可用性,benefit:福利/好处,bill:账单,booklet:小册子,briefing:简报,carrier:承运人,catalog:目录,caterer:餐饮承办商,clearance:清仓/许可,complimentary:免费的,confirmation:确认,consignment:托运货物,contractor:承包商,convention:大会,coupon:优惠券,credential:资质,deadline:截止日期,delighted:高兴的,departmental:部门的,discounted:打折的,dispatch:派送,documentation:文件,domestic:国内的,eligible:符合条件的,enclosed:随附的,equipment:设备,estimate:估价,executive:高管,expiration:到期,feedback:反馈,headquarters:总部,inquiry:询问,inventory:库存,invoice:发票,itemize:逐项列出,logistics:物流,manufacturer:制造商,membership:会员资格,memo:备忘录,notify:通知,operator:操作员,participant:参与者,postage:邮费,preferred:首选的,procedure:流程,processing:处理,procurement:采购,productivity:生产力,promotional:促销的,punctual:准时的,recipient:收件人,recruitment:招聘,refundable:可退款的,registration:登记,remittance:汇款,representative:代表,reschedule:改期,resume:简历,shipment:装运,signature:签名,subscription:订阅,subsidiary:子公司,survey:调查,temporary:临时的,transaction:交易,verification:验证,warranty:保修";
+SUPPLEMENTAL_DECK_WORDS.mind = "admiration:钦佩,affection:喜爱,aggression:攻击性,alienated:疏远的,ashamed:羞愧的,attachment:依恋,awkward:尴尬的,belonging:归属感,betray:背叛,bitter:怨恨的,blame:责备,bored:无聊的,brave:勇敢的,calm:平静的,cheerful:开心的,comforting:安慰人的,compassion:同情,conflict:冲突,confused:困惑的,considerate:体贴的,cope:应对,courage:勇气,defensive:防备的,delighted:高兴的,dependent:依赖的,disappointed:失望的,discouraged:泄气的,embarrassed:尴尬的,empathy:共情,envy:嫉妒,exhausted:筋疲力尽的,fearful:害怕的,grief:悲伤,guilt:内疚,helpless:无助的,homesick:想家的,hopeful:有希望的,hostile:敌对的,humiliated:受羞辱的,insecure:缺乏安全感的,jealous:嫉妒的,lonely:孤独的,loyal:忠诚的,miserable:痛苦的,moody:情绪化的,numb:麻木的,optimistic:乐观的,overwhelmed:不堪重负的,panic:恐慌,peaceful:平和的,protective:保护欲强的,proud:自豪的,regret:后悔,rejection:拒绝/被拒,resentful:怨恨的,sensitive:敏感的,shy:害羞的,sincere:真诚的,stressful:有压力的,sympathy:同情,thoughtful:体贴的,tolerant:宽容的,vulnerable:脆弱的,withdrawn:沉默寡言的,worried:担心的";
 
 const ROOT_LIBRARY = [
   { root: "port", meaning: "carry 搬运", method: "transport/import/export/portable 都和搬运、携带、转移有关。", examples: ["transport", "import", "export", "portable"] },
@@ -456,6 +457,46 @@ function phoneticFor(word) {
   return `/${clean.split("").slice(0, 7).join(" ")}/`;
 }
 
+function accurateMorphemesFor(word) {
+  const clean = String(word || "").toLowerCase().replace(/[^a-z]/g, "");
+  if (!clean) return [];
+  const overrides = {
+    abnormal: [["ab-", "前缀", "away from 偏离"], ["norm", "词根", "rule, standard 规则、标准"], ["-al", "后缀", "related to 与...有关的"]],
+    adapt: [["ad-", "前缀", "to, toward 向、朝"], ["apt", "词根", "fit 合适"]],
+    alternative: [["alter/altern", "词根", "other 另一个、其他的"], ["-ative", "后缀", "having the nature of 具有...性质的"]],
+    active: [["act", "词根", "do, act 做、行动"], ["-ive", "后缀", "having a tendency or quality 具有...倾向或性质的"]],
+    unable: [["un-", "前缀", "not 不、没有"], ["able", "词根", "capable 能够"]],
+    credible: [["cred", "词根", "believe, trust 相信、信任"], ["-ible", "后缀", "can be 能够被...的"]],
+    beneficial: [["bene-", "词根", "good 好"], ["fic", "词根", "make, do 做、产生"], ["-ial", "后缀", "related to 与...有关的"]],
+    productive: [["pro-", "前缀", "forward 向前"], ["duct", "词根", "lead 引导、带领"], ["-ive", "后缀", "having a tendency or quality 具有...倾向或性质的"]],
+    construction: [["con-", "前缀", "together 一起"], ["struct", "词根", "build 建造"], ["-ion", "后缀", "action or result 动作或结果"]],
+    transportation: [["trans-", "前缀", "across 跨越"], ["port", "词根", "carry 搬运、携带"], ["-ation", "后缀", "action or result 动作或结果"]],
+    international: [["inter-", "前缀", "between 在...之间"], ["nat", "词根", "born 出生"], ["-ional", "后缀", "related to 与...有关的"]]
+  };
+  if (overrides[clean]) return overrides[clean].map(([part, role, meaning]) => ({ part, role, meaning }));
+  const trustedRoots = MORPHEME_PATTERNS.filter((item) => !["log", "man/manu", "use/ut"].includes(item.key));
+  const root = trustedRoots.find((item) => item.re.test(clean));
+  const prefix = PREFIX_PATTERNS
+    .filter(([key]) => clean.startsWith(key) && clean.length > key.length + 3)
+    .sort((a, b) => b[0].length - a[0].length)[0];
+  const suffix = SUFFIX_PATTERNS
+    .filter(([key]) => clean.endsWith(key) && clean.length > key.length + 3)
+    .sort((a, b) => b[0].length - a[0].length)[0];
+  const parts = [];
+  if (prefix && root) parts.push({ part: prefix[0] + "-", role: "前缀", meaning: prefix[1] });
+  if (root) parts.push({ part: root.key, role: "词根", meaning: root.meaning });
+  if (suffix && root) parts.push({ part: "-" + suffix[0], role: "后缀", meaning: suffix[1] });
+  if (parts.length) return parts;
+  if (clean.length > 7) {
+    const middle = Math.ceil(clean.length / 2);
+    return [
+      { part: clean.slice(0, middle), role: "音形块（非词根）", meaning: "用于辅助拼写，不代表词源" },
+      { part: clean.slice(middle), role: "音形块（非词根）", meaning: "用于辅助拼写，不代表词源" }
+    ];
+  }
+  return [{ part: clean, role: "整体记忆", meaning: "暂无可靠拆分，结合例句记忆" }];
+}
+
 function plural(word) {
   if (word.endsWith("y")) return `${word.slice(0, -1)}ies`;
   if (/(s|x|ch|sh)$/.test(word)) return `${word}es`;
@@ -573,7 +614,7 @@ function phraseItemsFor(word, deckId, cn = "") {
 }
 
 function memoryFor(word, cn, root) {
-  const parts = morphemesFor(word);
+  const parts = accurateMorphemesFor(word);
   if (parts.length) {
     return `先看构词：${parts.map((item) => `${item.part}=${item.meaning.split(" ")[0]}`).join(" + ")}，再把整体意思“${cn}”放进例句里记。`;
   }
@@ -628,7 +669,7 @@ function meaningExamplesFor(word, cn, deckId) {
 function registerTextMap(entry) {
   return {
     ...entry,
-    morphemes: entry.morphemes || morphemesFor(entry.word),
+    morphemes: entry.morphemes || accurateMorphemesFor(entry.word),
     phraseItems: entry.phraseItems || phraseItemsFor(entry.word, entry.deckId, entry.cn),
     meanings: entry.meanings || meaningExamplesFor(entry.word, entry.cn, entry.deckId)
   };
@@ -649,26 +690,27 @@ function parseWords() {
       seenHeadwords.add(key);
       const root = rootFor(word);
       const family = familyFor(word);
+      const entryType = isPhrase(word) ? "phrase" : "headword";
       entries.push(registerTextMap({
         id: id++,
         word, cn,
         deckId: deck.id,
         deckTitle: deck.title,
         index,
-        phonetic: phoneticFor(word),
+        phonetic: "",
         root,
         family,
         phrases: phrasesFor(word, deck.id),
         memory: memoryFor(word, cn, root),
         example: exampleFor(word, deck.id),
-        type: "headword"
+        type: entryType
       }));
     });
   }
 
   const seen = new Set(entries.map((x) => x.word));
   const generated = [];
-  for (const base of entries) {
+  for (const base of entries.filter((entry) => entry.type === "headword")) {
     for (const fam of base.family) {
       if (generated.length >= 820) break;
       if (!fam || seen.has(fam)) continue;
@@ -682,7 +724,7 @@ function parseWords() {
         deckId: base.deckId,
         deckTitle: base.deckTitle,
         index: base.index + 0.1,
-        phonetic: phoneticFor(fam),
+        phonetic: "",
         root,
         family: [base.word],
         phrases: phrasesFor(fam, base.deckId).slice(0, 3),

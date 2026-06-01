@@ -63,6 +63,7 @@
           </div>
         </div>
         <div id="dailyPlan" class="daily-plan"></div>
+        <section id="petCenter" class="pet-center"></section>
         <div id="deckShelf" class="deck-shelf"></div>
       </section>
 
@@ -72,8 +73,11 @@
             <p class="eyebrow">当前词典</p>
             <h2 id="readerDeckTitle">选择一本词典</h2>
             <p id="readerDeckMeta" class="lead"></p>
+            <div class="reader-progress"><span id="readerProgressBar"></span></div>
+            <p id="readerProgressLabel" class="hint"></p>
             <div class="reader-controls">
               <button id="prevWord" class="ghost">上一页</button>
+              <button id="completeWord" class="primary">学会本页 +10</button>
               <button id="nextWord" class="primary">下一页</button>
             </div>
             <label>排序
@@ -115,6 +119,7 @@
             <button id="hardBtn" disabled>没记住</button>
             <button id="easyBtn" class="primary" disabled>记住了</button>
             <button id="spellModeBtn" class="ghost">切换拼写</button>
+            <button id="meaningModeBtn" class="ghost">切换英译中</button>
           </div>
         </div>
       </section>
