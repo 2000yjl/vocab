@@ -22,6 +22,18 @@ const CAT_TYPES = {
   tabby: { name: "狸花", image: "./tabby.png", line: "我会陪你把难词抓出来。" },
   silver: { name: "美短", image: "./silver.png", line: "连续学习会有新的礼物。" }
 };
+const PET_FILTERS = ["none", "saturate(.78) brightness(1.12)", "sepia(.38) saturate(1.18)", "hue-rotate(18deg) saturate(.82)", "grayscale(.58) contrast(1.08)", "hue-rotate(328deg) saturate(.92)", "brightness(.88) saturate(1.24)", "sepia(.62) brightness(.98)", "hue-rotate(52deg) saturate(.7)", "contrast(1.18) brightness(1.04)", "grayscale(.92) brightness(1.18)"];
+const PET_SUFFIXES = ["原野", "奶糖", "琥珀", "云朵", "晚霞", "星尘", "可可", "月光", "薄荷", "墨影", "霜雪"];
+const PET_RARITIES = ["普通", "普通", "普通", "稀有", "稀有", "稀有", "珍贵", "珍贵", "史诗", "史诗", "传说"];
+const PET_CATALOG = [
+  ...Object.entries(CAT_TYPES).flatMap(([type, item]) => PET_SUFFIXES.map((suffix, index) => ({
+    id: `${type}-${index}`, name: index ? `${item.name}·${suffix}` : item.name, image: item.image,
+    line: item.line, rarity: PET_RARITIES[index], filter: PET_FILTERS[index], species: "猫咪"
+  }))),
+  { id: "corgi-0", name: "单词柯基", image: "./corgi.png", line: "汪！今天也记住一个新词。", rarity: "隐藏", filter: "none", species: "彩蛋伙伴" },
+  { id: "rabbit-0", name: "书页垂耳兔", image: "./rabbit.png", line: "慢慢翻页，也会走得很远。", rarity: "隐藏", filter: "none", species: "彩蛋伙伴" },
+  { id: "hamster-0", name: "眼镜仓鼠", image: "./hamster.png", line: "我把难词收进小本子里了。", rarity: "隐藏", filter: "none", species: "彩蛋伙伴" }
+];
 const REWARD_POOL = ["柔软猫毛", "猫咪便签", "小鱼干", "逗猫棒", "幸运猫爪", "猫砂纪念章"];
 
 const $ = (selector) => document.querySelector(selector);
@@ -92,6 +104,10 @@ function ensureMeta() {
   meta.catHunger ??= 82;
   meta.rewards ||= [];
   meta.kittens ||= [];
+  meta.eggs ??= 0;
+  meta.learnedSinceEgg ??= 0;
+  meta.petUnlocks ||= ["orange-0", "tabby-0", "silver-0"];
+  if (["orange", "tabby", "silver"].includes(meta.cat)) meta.cat = `${meta.cat}-0`;
   meta.deckCursor ||= {};
   meta.completedDecks ||= {};
   if (meta.lastLogin !== todayKey()) {
@@ -179,6 +195,14 @@ function awardStudy(word, points = 10) {
     meta.rewards.unshift(REWARD_POOL[Math.floor(Math.random() * REWARD_POOL.length)]);
     meta.rewards = meta.rewards.slice(0, 8);
   }
+  if (first) {
+    meta.learnedSinceEgg += 1;
+    if (meta.learnedSinceEgg >= 6) {
+      meta.learnedSinceEgg = 0;
+      meta.eggs += 1;
+      meta.rewards.unshift("新的幼猫蛋");
+    }
+  }
   const completed = deckCompletedCount(word.deckId);
   const total = deckWords(word.deckId).length;
   if (total && completed === total && !meta.completedDecks[word.deckId]) {
@@ -189,29 +213,48 @@ function awardStudy(word, points = 10) {
   }
   if (first && meta.level >= 4 && meta.level % 3 === 0 && !meta.kittens.includes(meta.level)) {
     meta.kittens.push(meta.level);
+    meta.eggs += 1;
     meta.rewards.unshift(`随机幼猫蛋 Lv.${meta.level}`);
   }
+}
+
+function hatchPet() {
+  const meta = learnerMeta();
+  if (meta.eggs < 1) return;
+  const locked = PET_CATALOG.filter((pet) => !meta.petUnlocks.includes(pet.id));
+  if (!locked.length) return;
+  const pet = locked[Math.floor(Math.random() * locked.length)];
+  meta.eggs -= 1;
+  meta.petUnlocks.push(pet.id);
+  meta.cat = pet.id;
+  meta.rewards.unshift(`孵化成功：${pet.name}`);
+  saveState();
+  renderPetCollection();
 }
 
 function renderPetCenter() {
   const holder = $("#petCenter");
   if (!holder) return;
   const meta = learnerMeta();
-  const cat = CAT_TYPES[meta.cat] || CAT_TYPES.orange;
+  const cat = PET_CATALOG.find((pet) => pet.id === meta.cat) || PET_CATALOG[0];
   const rewards = meta.rewards.length ? meta.rewards.map((reward) => `<span>${escapeHtml(reward)}</span>`).join("") : "<span>完成学习后会收到礼物</span>";
   const life = meta.catHunger <= 0 ? "离开小窝，学习后可以把它接回来" : meta.catHunger <= 18 ? "饿了，需要马上学习" : meta.catHunger >= 82 ? "精神很好" : "正在陪你成长";
   holder.innerHTML = `
     <div class="pet-stage">
-      <img class="pet-avatar" style="--pet-scale:${meta.catGrowth}" src="${cat.image}" alt="${cat.name}" />
+      <img class="pet-avatar" style="--pet-scale:${meta.catGrowth};filter:${cat.filter}" src="${cat.image}" alt="${cat.name}" />
       <div class="pet-bubble">${meta.catHunger <= 10 ? "我有点饿了，陪我学几个词吧。" : escapeHtml(cat.line)}</div>
     </div>
     <div class="pet-dashboard">
       <p class="eyebrow">成长伙伴</p>
       <h3>${escapeHtml(cat.name)} · Lv.${meta.level}</h3>
       <div class="pet-meter"><span style="width:${meta.catHunger}%"></span></div>
-      <p class="hint">状态：${life} · 饱腹 ${meta.catHunger}% · 积分 ${meta.points} · 经验 ${meta.xp} · 幼猫蛋 ${meta.kittens.length}</p>
+      <p class="hint">状态：${life} · 饱腹 ${meta.catHunger}% · 积分 ${meta.points} · 经验 ${meta.xp} · 幼猫蛋 ${meta.eggs}</p>
       <div class="cat-picker">
-        ${Object.entries(CAT_TYPES).map(([key, item]) => `<button class="${meta.cat === key ? "active" : ""}" data-cat="${key}">${item.name}</button>`).join("")}
+        ${meta.petUnlocks.slice(0, 6).map((id) => PET_CATALOG.find((pet) => pet.id === id)).filter(Boolean).map((item) => `<button class="${meta.cat === item.id ? "active" : ""}" data-cat="${item.id}">${item.name}</button>`).join("")}
+      </div>
+      <div class="pet-actions">
+        <button class="ghost" type="button" data-open-collection>伙伴图鉴 ${meta.petUnlocks.length}/${PET_CATALOG.length}</button>
+        <button class="primary" type="button" data-hatch ${meta.eggs && meta.petUnlocks.length < PET_CATALOG.length ? "" : "disabled"}>孵化幼猫蛋</button>
       </div>
       <div class="reward-row">${rewards}</div>
     </div>
@@ -220,6 +263,36 @@ function renderPetCenter() {
     learnerMeta().cat = button.dataset.cat;
     saveState();
     renderPetCenter();
+  }));
+  holder.querySelector("[data-open-collection]").addEventListener("click", renderPetCollection);
+  holder.querySelector("[data-hatch]").addEventListener("click", hatchPet);
+}
+
+function renderPetCollection() {
+  const holder = $("#petCollection");
+  const meta = learnerMeta();
+  holder.classList.remove("hidden");
+  holder.innerHTML = `
+    <div class="collection-head">
+      <div><p class="eyebrow">学习伙伴图鉴</p><h3>已收集 ${meta.petUnlocks.length} / ${PET_CATALOG.length}</h3></div>
+      <button class="ghost" type="button" data-close-collection>关闭</button>
+    </div>
+    <p class="hint">每学会 6 个新单词获得一枚幼猫蛋。孵化不会重复，隐藏伙伴会在图鉴里随机出现。</p>
+    <div class="pet-grid">
+      ${PET_CATALOG.map((pet) => {
+        const unlocked = meta.petUnlocks.includes(pet.id);
+        return `<button class="pet-card ${unlocked ? "" : "mystery"} ${meta.cat === pet.id ? "active" : ""}" type="button" ${unlocked ? `data-pet-id="${pet.id}"` : "disabled"}>
+          <img src="${pet.image}" style="filter:${unlocked ? pet.filter : "brightness(0) opacity(.24)"}" alt="${unlocked ? pet.name : "未解锁伙伴"}" />
+          <b>${unlocked ? pet.name : "待孵化"}</b><small>${unlocked ? `${pet.rarity} · ${pet.species}` : "??? · 未解锁"}</small>
+        </button>`;
+      }).join("")}
+    </div>
+  `;
+  holder.querySelector("[data-close-collection]").addEventListener("click", () => holder.classList.add("hidden"));
+  holder.querySelectorAll("[data-pet-id]").forEach((button) => button.addEventListener("click", () => {
+    learnerMeta().cat = button.dataset.petId;
+    saveState();
+    holder.classList.add("hidden");
   }));
 }
 

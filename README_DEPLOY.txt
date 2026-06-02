@@ -15,6 +15,9 @@ cover.jpg
 orange.png
 tabby.png
 silver.png
+corgi.png
+rabbit.png
+hamster.png
 
 After committing the changes on GitHub, wait about 1-3 minutes for Netlify.
 Then open:
