@@ -3,146 +3,113 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>WordForge 终极实用英语词典</title>
+    <title>WordForge 多语种学习</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./style.css?v=20260602-pets" />
+    <link rel="stylesheet" href="./style.css?v=20260611-clean" />
   </head>
   <body>
-    <section id="login" class="login-screen">
-      <div class="cover-stage">
-        <article class="hero-book">
+    <main id="app" class="app">
+      <aside class="sidebar">
+        <div class="brand">
           <span>WordForge</span>
-          <strong>英语词汇大师课</strong>
-          <small>听 · 记 · 用 · 测 · 复习</small>
-        </article>
-      </div>
-      <form id="loginForm" class="login-panel">
-        <p class="eyebrow">一套真正拿来学、拿来用的英语词汇课</p>
-        <h1>打开一本词典，养成一种英语能力。</h1>
-        <p class="lead">从四级六级到托福雅思，从商务邮件到日常表达，把单词、短语、发音、例句和复习路线放进同一套体验里。</p>
-        <label>账号 <input id="username" autocomplete="username" placeholder="teacher 或 001" /></label>
-        <label>密码 <input id="password" type="password" autocomplete="current-password" placeholder="默认 123456" /></label>
-        <button class="primary" type="submit">进入词典</button>
-        <p id="loginError" class="error"></p>
-        <p class="hint">账号由课程管理员分发。</p>
-      </form>
-    </section>
-
-    <main id="app" class="app hidden">
-      <header class="topbar">
-        <div class="brand-block">
-          <span>WordForge</span>
-          <strong>英语词汇大师课</strong>
+          <strong>多语种学习</strong>
         </div>
-        <nav class="tabs" aria-label="学习模式">
-          <button class="tab active" data-view="shelf">书架</button>
-          <button class="tab" data-view="reader">翻页</button>
-          <button class="tab" data-view="dictionary">词典</button>
-          <button class="tab" data-view="practice">训练</button>
-          <button class="tab" data-view="settings">账号</button>
+        <nav class="nav" aria-label="主要页面">
+          <button class="nav-btn active" data-view="dashboard">首页</button>
+          <button class="nav-btn" data-view="learn">学习</button>
+          <button class="nav-btn" data-view="quiz">小测验</button>
+          <button class="nav-btn" data-view="mistakes">错词本</button>
         </nav>
-        <button id="logoutBtn" class="ghost">退出</button>
-      </header>
+        <div class="clock-card">
+          <b id="liveClock">--:--</b>
+          <span id="timeMood">今日学习场景</span>
+        </div>
+      </aside>
 
-      <section id="shelf" class="view active">
-        <div class="intro">
+      <section class="main">
+        <header class="topline">
           <div>
-            <p class="eyebrow">今日词汇书架</p>
-            <h2>选一本，翻开第一页，今天就多掌握一组表达。</h2>
-            <p class="lead">考试、商务、旅行、写作和真实生活按目标分库。每个词都能听、能看例句、能跳转派生词，也能进入复习队列。</p>
-            <div class="hero-actions">
-              <button id="continueBtn" class="primary" type="button">继续今天的学习</button>
-              <button id="reviewBtn" class="ghost" type="button">复习错题</button>
+            <p class="eyebrow">今天也往前一点</p>
+            <h1 id="pageTitle">Dashboard</h1>
+          </div>
+          <label class="deck-select">
+            语言
+            <select id="languageSelect"></select>
+          </label>
+          <label class="deck-select">
+            词库
+            <select id="deckSelect"></select>
+          </label>
+        </header>
+
+        <section id="dashboard" class="view active">
+          <div class="hero-panel">
+            <div>
+              <p class="eyebrow">今日任务</p>
+              <h2 id="todayHeadline">准备开始今天的学习</h2>
+              <p id="todayHint" class="lead"></p>
+              <button id="startTodayBtn" class="primary">开始今日学习</button>
+            </div>
+            <div class="progress-ring">
+              <span id="todayProgress">0%</span>
+              <small>今日完成</small>
             </div>
           </div>
-          <div class="stats">
-            <span>主单词 <strong id="totalCount">0</strong></span>
-            <span>掌握 <strong id="knownCount">0</strong></span>
-            <span>待复习 <strong id="dueCount">0</strong></span>
-            <span>连胜 <strong id="streakCount">0</strong></span>
-          </div>
-        </div>
-        <div id="dailyPlan" class="daily-plan"></div>
-        <section id="petCenter" class="pet-center"></section>
-        <section id="petCollection" class="pet-collection hidden"></section>
-        <div id="deckShelf" class="deck-shelf"></div>
-      </section>
 
-      <section id="reader" class="view">
-        <div class="reader-layout">
-          <aside class="reader-side">
-            <p class="eyebrow">当前词典</p>
-            <h2 id="readerDeckTitle">选择一本词典</h2>
-            <p id="readerDeckMeta" class="lead"></p>
-            <div class="reader-progress"><span id="readerProgressBar"></span></div>
-            <p id="readerProgressLabel" class="hint"></p>
-            <div class="reader-controls">
-              <button id="prevWord" class="ghost">上一页</button>
-              <button id="completeWord" class="primary">学会本页 +10</button>
-              <button id="nextWord" class="primary">下一页</button>
+          <div class="stat-grid">
+            <article><span>连续学习</span><strong id="streakDays">0</strong><small>天</small></article>
+            <article><span>掌握词数</span><strong id="masteredCount">0</strong><small>个</small></article>
+            <article><span>待复习</span><strong id="dueCount">0</strong><small>个</small></article>
+            <article><span>错词本</span><strong id="mistakeCount">0</strong><small>个</small></article>
+          </div>
+
+          <div class="section-title">
+            <h3>全部词库</h3>
+            <p>所有内容已开放，按目标选择即可开始。</p>
+          </div>
+          <div id="deckGrid" class="deck-grid"></div>
+        </section>
+
+        <section id="learn" class="view">
+          <div class="learn-layout">
+            <article id="wordCard" class="word-card"></article>
+            <aside class="side-panel">
+              <p class="eyebrow">学习节奏</p>
+              <h3 id="learnQueueTitle">今日学习</h3>
+              <p id="learnQueueHint" class="hint"></p>
+              <div class="mini-progress"><span id="learnProgressBar"></span></div>
+              <button id="favoriteBtn" class="ghost">收藏</button>
+            </aside>
+          </div>
+        </section>
+
+        <section id="quiz" class="view">
+          <div class="quiz-card">
+            <div class="quiz-head">
+              <p class="eyebrow" id="quizModeLabel">选择题</p>
+              <button id="toggleQuizMode" class="ghost">切换拼写题</button>
             </div>
-            <label>排序
-              <select id="sortMode">
-                <option value="book">词典顺序</option>
-                <option value="az">A-Z</option>
-                <option value="hard">错题优先</option>
-              </select>
-            </label>
-          </aside>
-          <article id="wordPage" class="word-page"></article>
-        </div>
-      </section>
-
-      <section id="dictionary" class="view">
-        <div class="dictionary-layout">
-          <aside class="filter-panel">
-            <label>词典 <select id="deckFilter"></select></label>
-            <label>搜索 <input id="searchBox" type="search" placeholder="英文 / 中文 / 词根 / 短语" /></label>
-            <p id="resultMeta" class="hint"></p>
-            <div id="wordList" class="word-list"></div>
-          </aside>
-          <article id="detailPanel" class="detail-panel"></article>
-        </div>
-      </section>
-
-      <section id="practice" class="view">
-        <div class="practice-card">
-          <p class="eyebrow" id="practiceMode">主动回忆</p>
-          <h2 id="quizPrompt">准备开始</h2>
-          <p id="quizMeta" class="lead"></p>
-          <div id="quizAnswer" class="answer hidden"></div>
-          <input id="spellInput" class="spell-input hidden" autocomplete="off" placeholder="拼写英文" />
-          <p id="practiceFeedback" class="feedback"></p>
-          <div class="actions">
-            <button id="showAnswer" class="ghost">看答案</button>
-            <button id="speakQuizUS" class="ghost">美音</button>
-            <button id="speakQuizUK" class="ghost">英音</button>
-            <button id="hardBtn" disabled>没记住</button>
-            <button id="easyBtn" class="primary" disabled>记住了</button>
-            <button id="spellModeBtn" class="ghost">切换拼写</button>
-            <button id="meaningModeBtn" class="ghost">切换英译中</button>
+            <h2 id="quizPrompt">准备开始</h2>
+            <div id="quizOptions" class="quiz-options"></div>
+            <input id="spellInput" class="spell-input hidden" placeholder="输入英文单词" autocomplete="off" />
+            <p id="quizFeedback" class="feedback"></p>
+            <div class="actions">
+              <button id="nextQuizBtn" class="primary">下一题</button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="settings" class="view">
-        <div class="settings-card">
-          <p class="eyebrow">账号设置</p>
-          <h2>更改自己的账号和密码</h2>
-          <p id="currentAccountLabel" class="lead"></p>
-          <label>当前密码 <input id="currentPassword" type="password" autocomplete="current-password" /></label>
-          <label>新账号 <input id="newUsername" autocomplete="username" placeholder="例如 yang 或 001" /></label>
-          <label>新密码 <input id="newPassword" type="password" autocomplete="new-password" placeholder="至少 4 位" /></label>
-          <button id="saveAccountBtn" class="primary" type="button">保存设置</button>
-          <p id="accountFeedback" class="feedback"></p>
-          <p class="hint">改密码后，其他设备会使用新密码登录。</p>
-        </div>
+        <section id="mistakes" class="view">
+          <div class="section-title">
+            <h3>错词本</h3>
+            <p>这里不是失败清单，是你的升级路线。优先复习它们，进步会很明显。</p>
+          </div>
+          <div id="mistakeList" class="mistake-list"></div>
+        </section>
       </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./supabase-config.js?v=20260602-pets"></script>
-    <script src="./data.js?v=20260602-pets"></script>
-    <script src="./app.js?v=20260602-pets"></script>
+    <script src="./data.js?v=20260611-clean"></script>
+    <script src="./app.js?v=20260611-clean"></script>
   </body>
 </html>

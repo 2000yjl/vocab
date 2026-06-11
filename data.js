@@ -504,13 +504,23 @@ function plural(word) {
   return `${word}s`;
 }
 
+function pastTense(word) {
+  if (word.endsWith("e")) return `${word}d`;
+  return `${word}ed`;
+}
+
+function gerund(word) {
+  if (word.endsWith("e") && !word.endsWith("ee")) return `${word.slice(0, -1)}ing`;
+  return `${word}ing`;
+}
+
 function familyFor(word) {
   const manual = MANUAL_FAMILY[word] || [];
   if (isPhrase(word) || manual.length) return [...new Set(manual)].slice(0, 5);
   const verbLike = /^(abandon|achieve|adapt|adjust|affect|approve|arrange|assume|compare|confirm|consider|create|decline|deliver|describe|develop|explain|focus|include|expand|allocate|anticipate|cease|collapse|consume|contradict|derive|emerge|enhance|evaluate|exclude|generate|highlight|interpret|obtain|participate|accumulate|alter|attribute|compensate|conduct|constrain|convert|detect|establish|evolve|extract|facilitate|integrate|monitor|clarify|coordinate|delegate|implement|prioritize|summarize|update|request|reschedule|postpone|resolve|install|delete|download|upload|configure|encrypt|forgive|encourage|understand|apologize|address|tackle)$/.test(word);
   const nounLike = /^(account|advantage|challenge|culture|detail|effort|environment|experience|agenda|applicant|appointment|branch|budget|candidate|client|conference|contract|deadline|department|deposit|discount|employee|expense|invoice|manager|notice|procedure|proposal|purchase|receipt|refund|reservation|schedule|supplier|transaction|warranty|appliance|balcony|bank|battery|clinic|complaint|entrance|grocery|landlord|neighbor|package|pharmacy|queue|roommate|screen|signal|subway|wallet|passport|ticket|visa|route|souvenir|emotion|expectation|relationship|choice|argument)$/.test(word);
   const safe = verbLike
-    ? [`${word}s`, `${word}ed`, `${word}ing`]
+    ? [`${word}s`, pastTense(word), gerund(word)]
     : nounLike
       ? [plural(word)]
       : [];
@@ -615,10 +625,17 @@ function phraseItemsFor(word, deckId, cn = "") {
 
 function memoryFor(word, cn, root) {
   const parts = accurateMorphemesFor(word);
-  if (parts.length) {
+  if (parts.length && !parts.every((item) => item.role.includes("整体记忆") || item.role.includes("音形块"))) {
     return `先看构词：${parts.map((item) => `${item.part}=${item.meaning.split(" ")[0]}`).join(" + ")}，再把整体意思“${cn}”放进例句里记。`;
   }
-  return `短词用拼写锁定：遮住英文，3 秒内写出 ${word}，再用“${cn}”造一句自己的话。`;
+  const hooks = {
+    abandon: "abandon 像把东西直接丢下不管：不仅是放弃，更有抛弃、遗弃的感觉。",
+    achieve: "achieve 像游戏进度终于达到 100%：不是想做，而是真的实现。",
+    deadline: "deadline 就是死线：线还没到，人已经开始冲刺。",
+    awkward: "awkward 像聊天突然冷场：空气都开始替你尴尬。",
+    procrastinate: "procrastinate 就是把今天的任务礼貌地推给明天的自己。"
+  };
+  return hooks[word] || `搞怪联想：给“${word} = ${cn}”配一个夸张画面，再用自己的话复述一遍。`;
 }
 
 function exampleFor(word, deckId) {
