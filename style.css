@@ -153,9 +153,12 @@ select, input { min-height: 46px; padding: 0 14px; background: rgba(255,255,255,
 .memory-tip b { color: var(--accent-2); }
 .word-section { margin-top: 14px; padding: 16px; border-radius: 20px; background: rgba(255,255,255,.56); }
 .word-section > b { display: block; margin-bottom: 10px; color: var(--accent); }
-.morpheme-row, .related-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.morpheme-row, .related-row, .pattern-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .morpheme-row span { padding: 9px 11px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,253,248,.72); color: var(--muted); font-size: 13px; line-height: 1.45; }
 .morpheme-row strong { display: block; color: var(--ink); font-family: Georgia, serif; font-size: 16px; }
+.pattern-row span { flex: 1 1 240px; padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,253,248,.72); color: var(--muted); line-height: 1.55; }
+.pattern-row strong { display: block; color: var(--ink); font-size: 14px; }
+.pattern-row em { display: block; margin-top: 6px; font-style: normal; color: var(--accent); }
 .mini { min-height: 34px; padding: 0 12px; border-radius: 999px; font-size: 13px; }
 .learn-actions, .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 .learn-actions button { flex: 1 1 180px; min-height: 56px; font-weight: 900; }
@@ -176,6 +179,12 @@ select, input { min-height: 46px; padding: 0 14px; background: rgba(255,255,255,
 .mistake-card p, .mistake-card small { margin-bottom: 0; color: var(--muted); }
 .mistake-card span { color: var(--danger); font-weight: 900; }
 .empty-state { padding: 24px; color: var(--muted); }
+.grammar-list { display: grid; gap: 14px; }
+.grammar-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .8fr) auto; gap: 16px; align-items: center; padding: 18px; border: 1px solid var(--line); border-radius: 24px; background: var(--panel); box-shadow: var(--shadow); backdrop-filter: blur(16px); }
+.grammar-card span { color: var(--accent-2); font-weight: 900; }
+.grammar-card h4 { margin: 4px 0 8px; font-size: 22px; }
+.grammar-card p { margin-bottom: 0; color: var(--muted); line-height: 1.6; }
+.grammar-card .pattern { color: var(--ink); font-weight: 900; }
 
 @media (max-width: 860px) {
   .app { grid-template-columns: 1fr; }
@@ -187,4 +196,5 @@ select, input { min-height: 46px; padding: 0 14px; background: rgba(255,255,255,
   .pet-panel img { width: 110px; height: 110px; }
   .quiz-options { grid-template-columns: 1fr; }
   .mistake-card { grid-template-columns: 1fr; }
+  .grammar-card { grid-template-columns: 1fr; }
 }

@@ -108,18 +108,76 @@ const EXTRA_LANGUAGE_WORDS = {
 LANGUAGE_PACKS.forEach((pack) => {
   pack.words.push(...(EXTRA_LANGUAGE_WORDS[pack.lang] || []));
 });
-function makeRows(text, lang) {
-  const templates = {
-    en: (word, cn) => [`${word}`, cn, word, `I can hear and use "${word}" clearly.`, `我能清楚听出并使用“${cn}”。`],
-    ko: (word, cn) => [word, cn, word, `오늘은 "${word}"를 또렷하게 듣고 따라 해요.`, `今天清楚听辨并跟读“${cn}”。`],
-    ja: (word, cn) => [word, cn, word, `今日は「${word}」を聞いて、声に出します。`, `今天听辨并跟读“${cn}”。`],
-    de: (word, cn) => [word, cn, word, `Ich benutze "${word}" in einem klaren Satz.`, `我把“${cn}”放进一个清楚的句子。`],
-    es: (word, cn) => [word, cn, word, `Uso "${word}" en una frase clara.`, `我把“${cn}”放进一个清楚的句子。`],
-    fr: (word, cn) => [word, cn, word, `J'utilise "${word}" dans une phrase claire.`, `我把“${cn}”放进一个清楚的句子。`]
+const JA_ROMAJI = {"あ":"a","い":"i","う":"u","え":"e","お":"o","か":"ka","き":"ki","く":"ku","け":"ke","こ":"ko","さ":"sa","し":"shi","す":"su","せ":"se","そ":"so","た":"ta","ち":"chi","つ":"tsu","て":"te","と":"to","な":"na","に":"ni","ぬ":"nu","ね":"ne","の":"no","は":"ha","ひ":"hi","ふ":"fu","へ":"he","ほ":"ho","ま":"ma","み":"mi","む":"mu","め":"me","も":"mo","や":"ya","ゆ":"yu","よ":"yo","ら":"ra","り":"ri","る":"ru","れ":"re","ろ":"ro","わ":"wa","を":"wo","ん":"n","が":"ga","ざ":"za","だ":"da","ば":"ba","ぱ":"pa","きゃ":"kya","しゅ":"shu","ちょ":"cho","っ":"tsu","ー":"-","私":"watashi","あなた":"anata","人":"hito","友達":"tomodachi","家族":"kazoku","名前":"namae","家":"ie","学校":"gakkou","会社":"kaisha","店":"mise","駅":"eki","道":"michi","部屋":"heya","水":"mizu","ご飯":"gohan","お茶":"ocha","お金":"okane","時間":"jikan","今日":"kyou","明日":"ashita","昨日":"kinou","朝":"asa","昼":"hiru","夜":"yoru","今":"ima","ここ":"koko","そこ":"soko","あそこ":"asoko","どこ":"doko","何":"nani","なぜ":"naze","いつ":"itsu","良い":"ii / yoi","悪い":"warui","大きい":"ookii","小さい":"chiisai","多い":"ooi","少ない":"sukunai","早い":"hayai","遅い":"osoi","簡単":"kantan","難しい":"muzukashii","ある":"aru","いる":"iru","行く":"iku","来る":"kuru","見る":"miru","聞く":"kiku","話す":"hanasu","食べる":"taberu","飲む":"nomu","買う":"kau","使う":"tsukau","分かる":"wakaru","勉強する":"benkyou suru","働く":"hataraku","休む":"yasumu","待つ":"matsu","必要":"hitsuyou","好き":"suki","嫌い":"kirai","始める":"hajimeru","終わる":"owaru","メニュー":"menyuu","注文":"chuumon","会計":"kaikei","領収書":"ryoushuusho","カード":"kaado","現金":"genkin","値段":"nedan","割引":"waribiki","サイズ":"saizu","色":"iro","服":"fuku","靴":"kutsu","電車":"densha","地下鉄":"chikatetsu","バス":"basu","タクシー":"takushii","空港":"kuukou","切符":"kippu","出口":"deguchi","入口":"iriguchi","予約":"yoyaku","ホテル":"hoteru","鍵":"kagi","住所":"juusho","電話番号":"denwa bangou","病院":"byouin","薬局":"yakkyoku","風邪":"kaze","熱":"netsu","痛い":"itai","助けてください":"tasukete kudasai","大丈夫です":"daijoubu desu","少し待ってください":"sukoshi matte kudasai","ゆっくり話してください":"yukkuri hanashite kudasai","もう一度お願いします":"mou ichido onegai shimasu","会議":"kaigi","予定":"yotei","資料":"shiryou","報告":"houkoku","確認":"kakunin","依頼":"irai","返信":"henshin","添付":"tenpu","締切":"shimekiri","進捗":"shinchoku","完了":"kanryou","問題":"mondai","解決":"kaiketsu","提案":"teian","顧客":"kokyaku","担当者":"tantousha","契約":"keiyaku","見積もり":"mitsumori","予算":"yosan","売上":"uriage","費用":"hiyou","承認":"shounin","検討":"kentou","修正":"shuusei","共有":"kyouyuu","協力":"kyouryoku","優先順位":"yuusen juni","効率":"kouritsu","品質":"hinshitsu","目標":"mokuhyou","社会":"shakai","経済":"keizai","政治":"seiji","文化":"bunka","教育":"kyouiku","環境":"kankyou","技術":"gijutsu","人工知能":"jinkou chinou","変化":"henka","発展":"hatten","影響":"eikyou","原因":"genin","結果":"kekka","可能性":"kanousei","必要性":"hitsuyousei","重要性":"juuyousei","関係":"kankei","傾向":"keikou","分析":"bunseki","主張":"shuchou","根拠":"konkyo","比較":"hikaku","違い":"chigai","共通点":"kyoutsuuten","長所":"chousho","短所":"tansho","解決策":"kaiketsusaku","政策":"seisaku","制度":"seido","権利":"kenri","責任":"sekinin","参加":"sanka","対立":"tairitsu","持続可能性":"jizoku kanousei","頭":"atama","目":"me","鼻":"hana","口":"kuchi","耳":"mimi","手":"te","足":"ashi","体":"karada","心":"kokoro","健康":"kenkou","運動":"undou","睡眠":"suimin","夢":"yume","気分":"kibun","幸せ":"shiawase","悲しみ":"kanashimi","怒り":"ikari","恐れ":"osore","心配":"shinpai","希望":"kibou","愛":"ai","信頼":"shinrai","習慣":"shuukan","選択":"sentaku","機会":"kikai","危険":"kiken","間違い":"machigai","経験":"keiken","成功":"seikou","失敗":"shippai","計画":"keikaku","準備":"junbi","練習":"renshuu","試験":"shiken","質問":"shitsumon","答え":"kotae","説明":"setsumei","意見":"iken","考え":"kangae","情報":"jouhou","ニュース":"nyuusu","記事":"kiji","インターネット":"intaanetto","写真":"shashin","動画":"douga","音楽":"ongaku","映画":"eiga","本":"hon","文章":"bunshou","言語":"gengo","文法":"bunpou","発音":"hatsuon","単語":"tango","文":"bun","自然":"shizen","空":"sora","海":"umi","川":"kawa","山":"yama","森":"mori","雨":"ame","雪":"yuki","風":"kaze","天気":"tenki","動物":"doubutsu","植物":"shokubutsu","エネルギー":"enerugii","気候":"kikou","汚染":"osen","保護":"hogo","都市":"toshi","村":"mura","建物":"tatemono","道路":"douro","交通":"koutsuu","人口":"jinkou","産業":"sangyou","市場":"shijou","価格":"kakaku","消費":"shouhi","生産":"seisan","サービス":"saabisu","法律":"houritsu","自由":"jiyuu","平等":"byoudou","安全":"anzen","犯罪":"hanzai","歴史":"rekishi","伝統":"dentou","芸術":"geijutsu","科学":"kagaku","研究":"kenkyuu","証拠":"shouko","戦略":"senryaku","決定":"kettei","成果":"seika","専門家":"senmonka"};
+
+function romanizeKorean(text) {
+  const initial = ["g","kk","n","d","tt","r","m","b","pp","s","ss","","j","jj","ch","k","t","p","h"];
+  const medial = ["a","ae","ya","yae","eo","e","yeo","ye","o","wa","wae","oe","yo","u","wo","we","wi","yu","eu","ui","i"];
+  const final = ["","k","k","ks","n","nj","nh","t","l","lk","lm","lb","ls","lt","lp","lh","m","p","ps","t","t","ng","t","t","k","t","p","t"];
+  return Array.from(text).map((char) => {
+    const code = char.charCodeAt(0) - 0xac00;
+    if (code < 0 || code > 11171) return char;
+    const i = Math.floor(code / 588);
+    const v = Math.floor((code % 588) / 28);
+    const f = code % 28;
+    return `${initial[i]}${medial[v]}${final[f]}`;
+  }).join(" ").replace(/\s+/g, " ").trim();
+}
+
+function romanizeJapanese(text) {
+  if (JA_ROMAJI[text]) return JA_ROMAJI[text];
+  const kana = { "ア":"a","イ":"i","ウ":"u","エ":"e","オ":"o","カ":"ka","キ":"ki","ク":"ku","ケ":"ke","コ":"ko","サ":"sa","シ":"shi","ス":"su","セ":"se","ソ":"so","タ":"ta","チ":"chi","ツ":"tsu","テ":"te","ト":"to","ナ":"na","ニ":"ni","ヌ":"nu","ネ":"ne","ノ":"no","ハ":"ha","ヒ":"hi","フ":"fu","ヘ":"he","ホ":"ho","マ":"ma","ミ":"mi","ム":"mu","メ":"me","モ":"mo","ヤ":"ya","ユ":"yu","ヨ":"yo","ラ":"ra","リ":"ri","ル":"ru","レ":"re","ロ":"ro","ワ":"wa","ン":"n","ー":"-","あ":"a","い":"i","う":"u","え":"e","お":"o","か":"ka","き":"ki","く":"ku","け":"ke","こ":"ko","さ":"sa","し":"shi","す":"su","せ":"se","そ":"so","た":"ta","ち":"chi","つ":"tsu","て":"te","と":"to","な":"na","に":"ni","ぬ":"nu","ね":"ne","の":"no","は":"ha","ひ":"hi","ふ":"fu","へ":"he","ほ":"ho","ま":"ma","み":"mi","む":"mu","め":"me","も":"mo","や":"ya","ゆ":"yu","よ":"yo","ら":"ra","り":"ri","る":"ru","れ":"re","ろ":"ro","わ":"wa","を":"wo","ん":"n" };
+  return Array.from(text).map((char) => kana[char] || char).join(" ");
+}
+
+function pronunciationFor(word, pronunciation, lang) {
+  if (pronunciation && pronunciation !== word) return pronunciation;
+  if (lang === "ko") {
+    const jamo = { "ㅇ": "silent / ng", "ㄲ": "kk", "ㄸ": "tt", "ㅃ": "pp", "ㅆ": "ss", "ㅉ": "jj" };
+    return jamo[word] || romanizeKorean(word);
+  }
+  if (lang === "ja") return romanizeJapanese(word);
+  return pronunciation || word;
+}
+
+function exampleForLanguage(word, cn, lang, deckId) {
+  if (/sound|phonics|sounds/.test(deckId || "")) {
+    const map = {
+      en: [`Listen to "${word}", then say it three times.`, `听“${cn}”，再跟读三遍。`],
+      ko: [`"${word}"의 모양과 소리를 같이 기억해요.`, `把“${cn}”的形状和声音一起记。`],
+      ja: [`「${word}」の形と音を一緒に覚えます。`, `把“${cn}”的形状和声音一起记。`],
+      de: [`Ich höre "${word}" und spreche es langsam nach.`, `我听“${cn}”，再慢慢跟读。`],
+      es: [`Escucho "${word}" y lo repito despacio.`, `我听“${cn}”，再慢慢跟读。`],
+      fr: [`J'écoute "${word}" et je le répète lentement.`, `我听“${cn}”，再慢慢跟读。`]
+    };
+    return map[lang] || map.en;
+  }
+  const koreanTopic = (value) => {
+    const last = Array.from(value).at(-1) || "";
+    const code = last.charCodeAt(0) - 0xac00;
+    if (code < 0 || code > 11171) return "는";
+    return code % 28 ? "은" : "는";
   };
+  const map = {
+    en: [`I can use "${word}" in a clear sentence.`, `我能在一个清楚句子里使用“${cn}”。`],
+    ko: [`${word}${koreanTopic(word)} "${cn}"이라는 뜻이에요.`, `“${word}”的意思是“${cn}”。`],
+    ja: [`「${word}」は「${cn}」という意味です。`, `“${word}”的意思是“${cn}”。`],
+    de: [`"${word}" bedeutet "${cn}" und kommt häufig in Alltagstexten vor.`, `“${word}”的意思是“${cn}”，常见于日常文本。`],
+    es: [`"${word}" significa "${cn}" y aparece en contextos reales.`, `“${word}”的意思是“${cn}”，会出现在真实语境中。`],
+    fr: [`"${word}" signifie "${cn}" et apparaît dans des contextes réels.`, `“${word}”的意思是“${cn}”，会出现在真实语境中。`]
+  };
+  return map[lang] || map.en;
+}
+
+function makeRows(text, lang) {
   return text.trim().split(/\s*,\s*/).filter(Boolean).map((pair) => {
-    const [word, cn] = pair.split(":");
-    return templates[lang](word.trim(), (cn || "").trim());
+    const [rawWord, rawCn] = pair.split(":");
+    const word = rawWord.trim();
+    const cn = (rawCn || "").trim();
+    const leadingPron = cn.match(/^[/a-zA-Zāēīōūüñçß -]+(?=\s|$)/)?.[0]?.trim();
+    const generated = pronunciationFor(word, "", lang);
+    const pronunciation = leadingPron || generated || word;
+    return [word, cn, pronunciation, "", ""];
   });
 }
 const COURSE_PACKS = [
@@ -175,22 +233,27 @@ const newsDeck = {
 };
 const baseDecks = (window.WORDFORGE_DECKS || []).map((deck) => ({ ...deck, language: "en" }));
 const decks = [...baseDecks, newsDeck, ...languageDecks];
-const multiEntries = LANGUAGE_PACKS.flatMap((pack, packIndex) => pack.words.map(([word, cn, pronunciation, example, exampleZh], index) => ({
-  id: 900000 + packIndex * 100 + index,
-  word,
-  cn,
-  phonetic: pronunciation || word,
-  deckId: pack.id || `${pack.lang}-basic`,
-  deckTitle: pack.title,
-  language: pack.lang,
-  locale: LANGUAGE_META[pack.lang].locale,
-  type: "headword",
-  index,
-  family: [],
-  morphemes: [{ part: word, role: "基础表达", meaning: "先掌握发音、意思和使用场景" }],
-  meanings: [{ cn, example: example || word, exampleZh: exampleZh || cn }],
-  memory: `先听发音，再把“${cn}”放进例句里说一遍。`
-})));
+const multiEntries = LANGUAGE_PACKS.flatMap((pack, packIndex) => pack.words.map(([word, cn, pronunciation, example, exampleZh], index) => {
+  const deckId = pack.id || `${pack.lang}-basic`;
+  const generatedExample = exampleForLanguage(word, cn, pack.lang, deckId);
+  const finalPronunciation = pronunciationFor(word, pronunciation, pack.lang);
+  return {
+    id: 900000 + packIndex * 100 + index,
+    word,
+    cn,
+    phonetic: finalPronunciation || word,
+    deckId,
+    deckTitle: pack.title,
+    language: pack.lang,
+    locale: LANGUAGE_META[pack.lang].locale,
+    type: "headword",
+    index,
+    family: [],
+    morphemes: [{ part: word, role: "读音 / 罗马音", meaning: finalPronunciation || word }],
+    meanings: [{ cn, example: example || generatedExample[0], exampleZh: exampleZh || generatedExample[1] }],
+    memory: isSoundDeck({ deckId }) ? `看形状，听读音：${finalPronunciation || word}。先慢读三遍，再闭眼回想字形。` : `读音：${finalPronunciation || word}。先会读，再把“${cn}”放进真实句子里。`
+  };
+}));
 const newsEntries = [
   {
     word: "emissions",
@@ -279,12 +342,61 @@ const PETS = [
   { id: "corgi", name: "单词柯基", image: "./corgi.png", mood: "汪，完成一张卡就算往前走。" }
 ];
 
+const GRAMMAR_PATTERNS = {
+  en: [
+    { id: "en-be", level: "A1", title: "be 动词说明身份/状态", pattern: "I am / You are / It is + noun/adjective.", cn: "我/你/它是……；处于……状态。", example: "The answer is simple.", exampleZh: "答案很简单。", prompt: "答案很简单。", answer: "The answer is simple.", keywords: ["simple","important","difficult","easy","student","teacher"] },
+    { id: "en-there", level: "A1", title: "There is / are 表示存在", pattern: "There is/are + something + place.", cn: "某处有某物。", example: "There is a problem in the report.", exampleZh: "报告里有一个问题。", prompt: "报告里有一个问题。", answer: "There is a problem in the report.", keywords: ["problem","report","issue","evidence"] },
+    { id: "en-need", level: "A2", title: "need to 表示需要做", pattern: "subject + need(s) to + verb.", cn: "某人需要做某事。", example: "We need to confirm the schedule.", exampleZh: "我们需要确认日程。", prompt: "我们需要确认日程。", answer: "We need to confirm the schedule.", keywords: ["need","confirm","schedule","prepare"] },
+    { id: "en-because", level: "A2", title: "because 说明原因", pattern: "result + because + reason.", cn: "用 because 解释原因。", example: "The plan changed because the cost increased.", exampleZh: "计划改变了，因为成本增加了。", prompt: "计划改变了，因为成本增加了。", answer: "The plan changed because the cost increased.", keywords: ["cause","reason","cost","increase","change"] },
+    { id: "en-passive", level: "B1", title: "被动语态突出结果", pattern: "subject + be + past participle.", cn: "强调事情被完成/被影响。", example: "The proposal was approved yesterday.", exampleZh: "提案昨天被批准了。", prompt: "提案昨天被批准了。", answer: "The proposal was approved yesterday.", keywords: ["approve","proposal","policy","produce"] },
+    { id: "en-relative", level: "B2", title: "定语从句补充说明", pattern: "noun + who/that/which + clause.", cn: "给名词加解释。", example: "The method that we tested was effective.", exampleZh: "我们测试过的方法是有效的。", prompt: "我们测试过的方法是有效的。", answer: "The method that we tested was effective.", keywords: ["method","effective","research","evidence"] }
+  ],
+  ko: [
+    { id: "ko-topic", level: "A1", title: "은/는 主题句", pattern: "명사 + 은/는 + 설명이에요.", cn: "把名词作为话题：至于……，它是……。", example: "머리는 몸의 한 부분이에요.", exampleZh: "头是身体的一部分。", prompt: "头是身体的一部分。", answer: "머리는 몸의 한 부분이에요.", keywords: ["머리","몸","사람","시간"] },
+    { id: "ko-place", level: "A1", title: "에 있어요 表示在某处", pattern: "명사 + 은/는 + 장소 + 에 있어요.", cn: "某物/某人在某处。", example: "친구는 학교에 있어요.", exampleZh: "朋友在学校。", prompt: "朋友在学校。", answer: "친구는 학교에 있어요.", keywords: ["친구","학교","회사","집","역"] },
+    { id: "ko-want", level: "A2", title: "고 싶어요 表示想做", pattern: "동사 어간 + 고 싶어요.", cn: "我想做某事。", example: "저는 한국어를 공부하고 싶어요.", exampleZh: "我想学习韩语。", prompt: "我想学习韩语。", answer: "저는 한국어를 공부하고 싶어요.", keywords: ["공부하다","먹다","마시다","가다"] },
+    { id: "ko-request", level: "A2", title: "아/어 주세요 表示请求", pattern: "동사 + 아/어 주세요.", cn: "请帮我做……。", example: "천천히 말해 주세요.", exampleZh: "请慢慢说。", prompt: "请慢慢说。", answer: "천천히 말해 주세요.", keywords: ["주세요","말하다","도와주세요","기다리다"] },
+    { id: "ko-because", level: "B1", title: "아서/어서 表示原因", pattern: "원인 + 아서/어서 + 결과.", cn: "因为……所以……。", example: "시간이 없어서 택시를 탔어요.", exampleZh: "因为没有时间，所以坐了出租车。", prompt: "因为没有时间，所以坐了出租车。", answer: "시간이 없어서 택시를 탔어요.", keywords: ["시간","없다","택시","이유"] },
+    { id: "ko-formal", level: "B2", title: "다고 생각해요 表示观点", pattern: "문장 + 다고 생각해요.", cn: "我认为……。", example: "환경 보호가 중요하다고 생각해요.", exampleZh: "我认为环境保护很重要。", prompt: "我认为环境保护很重要。", answer: "환경 보호가 중요하다고 생각해요.", keywords: ["환경","중요성","생각","정책"] }
+  ],
+  ja: [
+    { id: "ja-wa", level: "A1", title: "は 主题句", pattern: "名詞 + は + 説明です。", cn: "把名词作为主题：……是……。", example: "頭は体の一部です。", exampleZh: "头是身体的一部分。", prompt: "头是身体的一部分。", answer: "頭は体の一部です。", keywords: ["頭","体","私","友達"] },
+    { id: "ja-place", level: "A1", title: "にあります / にいます", pattern: "名詞 + は + 場所 + にあります/います。", cn: "某物/某人在某处。", example: "友達は駅にいます。", exampleZh: "朋友在车站。", prompt: "朋友在车站。", answer: "友達は駅にいます。", keywords: ["友達","駅","学校","会社","家"] },
+    { id: "ja-want", level: "A2", title: "たいです 表示想做", pattern: "動詞ます形去ます + たいです。", cn: "想做某事。", example: "日本語を勉強したいです。", exampleZh: "我想学习日语。", prompt: "我想学习日语。", answer: "日本語を勉強したいです。", keywords: ["勉強する","食べる","飲む","行く"] },
+    { id: "ja-request", level: "A2", title: "てください 表示请求", pattern: "動詞て形 + ください。", cn: "请做……。", example: "ゆっくり話してください。", exampleZh: "请慢慢说。", prompt: "请慢慢说。", answer: "ゆっくり話してください。", keywords: ["話す","待つ","助けてください"] },
+    { id: "ja-because", level: "B1", title: "から 表示原因", pattern: "理由 + から、結果。", cn: "因为……所以……。", example: "時間がないから、タクシーで行きます。", exampleZh: "因为没有时间，所以坐出租车去。", prompt: "因为没有时间，所以坐出租车去。", answer: "時間がないから、タクシーで行きます。", keywords: ["時間","タクシー","理由","結果"] },
+    { id: "ja-opinion", level: "B2", title: "と思います 表示观点", pattern: "普通形 + と思います。", cn: "我认为……。", example: "環境保護は重要だと思います。", exampleZh: "我认为环境保护很重要。", prompt: "我认为环境保护很重要。", answer: "環境保護は重要だと思います。", keywords: ["環境","重要性","意見","考え"] }
+  ],
+  de: [
+    { id: "de-verb2", level: "A1", title: "德语动词第二位", pattern: "Heute / Ich + Verb + ...", cn: "陈述句中变位动词通常在第二位。", example: "Heute lerne ich Deutsch.", exampleZh: "今天我学习德语。", prompt: "今天我学习德语。", answer: "Heute lerne ich Deutsch.", keywords: ["heute","lernen","Deutsch","Zeit"] },
+    { id: "de-article", level: "A1", title: "名词要带冠词", pattern: "der/die/das + Nomen", cn: "德语名词通常和性别冠词一起记。", example: "Der Kopf tut weh.", exampleZh: "头疼。", prompt: "头疼。", answer: "Der Kopf tut weh.", keywords: ["der Kopf","die Zeit","das Haus"] },
+    { id: "de-modal", level: "A2", title: "möchte 表示想要", pattern: "Ich möchte + noun / infinitive.", cn: "礼貌表达想要。", example: "Ich möchte einen Kaffee.", exampleZh: "我想要一杯咖啡。", prompt: "我想要一杯咖啡。", answer: "Ich möchte einen Kaffee.", keywords: ["Kaffee","kaufen","mögen"] },
+    { id: "de-because", level: "B1", title: "weil 从句动词后置", pattern: "..., weil + subject + ... + verb.", cn: "weil 从句里动词放最后。", example: "Ich nehme ein Taxi, weil ich keine Zeit habe.", exampleZh: "我坐出租车，因为我没有时间。", prompt: "我坐出租车，因为我没有时间。", answer: "Ich nehme ein Taxi, weil ich keine Zeit habe.", keywords: ["Zeit","Taxi","Grund"] },
+    { id: "de-that", level: "B2", title: "dass 引导内容从句", pattern: "Ich denke, dass + clause.", cn: "表达“我认为……”。", example: "Ich denke, dass Umweltschutz wichtig ist.", exampleZh: "我认为环境保护很重要。", prompt: "我认为环境保护很重要。", answer: "Ich denke, dass Umweltschutz wichtig ist.", keywords: ["Umwelt","wichtig","Meinung"] }
+  ],
+  es: [
+    { id: "es-ser-estar", level: "A1", title: "ser / estar 区分", pattern: "ser = 身份/本质；estar = 状态/位置。", cn: "区分“是”和“处于/在”。", example: "Estoy en casa.", exampleZh: "我在家。", prompt: "我在家。", answer: "Estoy en casa.", keywords: ["casa","estar","ciudad"] },
+    { id: "es-gender", level: "A1", title: "阴阳性和冠词", pattern: "el/la + noun; un/una + noun.", cn: "名词常带性别冠词。", example: "La pregunta es fácil.", exampleZh: "这个问题很简单。", prompt: "这个问题很简单。", answer: "La pregunta es fácil.", keywords: ["pregunta","respuesta","persona"] },
+    { id: "es-want", level: "A2", title: "querer + infinitivo", pattern: "Quiero + infinitive / noun.", cn: "我想要/想做。", example: "Quiero aprender español.", exampleZh: "我想学习西班牙语。", prompt: "我想学习西班牙语。", answer: "Quiero aprender español.", keywords: ["quiero","aprender","comprar"] },
+    { id: "es-because", level: "B1", title: "porque 表示原因", pattern: "result + porque + reason.", cn: "因为……。", example: "Tomo un taxi porque no tengo tiempo.", exampleZh: "我坐出租车，因为没有时间。", prompt: "我坐出租车，因为没有时间。", answer: "Tomo un taxi porque no tengo tiempo.", keywords: ["tiempo","taxi","causa"] },
+    { id: "es-opinion", level: "B2", title: "creo que 表示观点", pattern: "Creo que + sentence.", cn: "我认为……。", example: "Creo que la protección ambiental es importante.", exampleZh: "我认为环境保护很重要。", prompt: "我认为环境保护很重要。", answer: "Creo que la protección ambiental es importante.", keywords: ["medio ambiente","importante","opinión"] }
+  ],
+  fr: [
+    { id: "fr-etre", level: "A1", title: "être 表示身份/状态", pattern: "Je suis / Il est / C'est + noun/adjective.", cn: "是……；处于……状态。", example: "La question est facile.", exampleZh: "这个问题很简单。", prompt: "这个问题很简单。", answer: "La question est facile.", keywords: ["facile","question","important"] },
+    { id: "fr-article", level: "A1", title: "冠词 le/la/les", pattern: "le/la/les + nom", cn: "法语名词通常带冠词。", example: "Le temps est important.", exampleZh: "时间很重要。", prompt: "时间很重要。", answer: "Le temps est important.", keywords: ["temps","ville","travail"] },
+    { id: "fr-want", level: "A2", title: "vouloir + infinitif", pattern: "Je veux / Je voudrais + infinitive/noun.", cn: "想要/想做，voudrais 更礼貌。", example: "Je voudrais un café.", exampleZh: "我想要一杯咖啡。", prompt: "我想要一杯咖啡。", answer: "Je voudrais un café.", keywords: ["café","vouloir","acheter"] },
+    { id: "fr-because", level: "B1", title: "parce que 表示原因", pattern: "result + parce que + reason.", cn: "因为……。", example: "Je prends un taxi parce que je n'ai pas le temps.", exampleZh: "我坐出租车，因为我没有时间。", prompt: "我坐出租车，因为我没有时间。", answer: "Je prends un taxi parce que je n'ai pas le temps.", keywords: ["temps","taxi","cause"] },
+    { id: "fr-opinion", level: "B2", title: "je pense que 表示观点", pattern: "Je pense que + sentence.", cn: "我认为……。", example: "Je pense que la protection de l'environnement est importante.", exampleZh: "我认为环境保护很重要。", prompt: "我认为环境保护很重要。", answer: "Je pense que la protection de l'environnement est importante.", keywords: ["environnement","important","opinion"] }
+  ]
+};
+
 let state = loadState();
 let activeLanguage = state.activeLanguage || "en";
 let activeDeck = state.activeDeck || decks.find((deck) => deck.language === activeLanguage && deckWords(deck.id).length)?.id || decks[0]?.id;
 let activeView = "dashboard";
 let currentWord = null;
 let quizWord = null;
+let quizPattern = null;
 let quizMode = "choice";
 
 const $ = (selector) => document.querySelector(selector);
@@ -419,6 +531,25 @@ function normalize(value) {
   return String(value || "").trim().toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/\s+/g, " ");
 }
 
+function normalizeAnswer(value) {
+  return String(value || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
+}
+
+function grammarPatterns(lang = activeLanguage) {
+  return GRAMMAR_PATTERNS[lang] || GRAMMAR_PATTERNS.en;
+}
+
+function relatedPatterns(word) {
+  const normalizedWord = normalizeAnswer(word.word);
+  const normalizedCn = normalizeAnswer(word.cn);
+  const matched = grammarPatterns(word.language)
+    .filter((pattern) => (pattern.keywords || []).some((key) => {
+      const normalizedKey = normalizeAnswer(key);
+      return normalizedWord.includes(normalizedKey) || normalizedKey.includes(normalizedWord) || normalizedCn.includes(normalizedKey);
+    }));
+  return (matched.length ? matched : grammarPatterns(word.language)).slice(0, 2);
+}
+
 function firstMeaning(word) {
   const meaning = word.meanings?.[0] || { cn: word.cn, example: word.example || "" };
   return { ...meaning, exampleZh: meaning.exampleZh || meaning.cn || word.cn };
@@ -432,7 +563,74 @@ function difficultyLabel(word) {
   return "新词";
 }
 
+const SOUND_HINTS = {
+  "ㅏ": { image: "竖线像一个人站着，右边短横像嘴巴张开向外喊 a。", mouth: "嘴自然张开，发短促清楚的 a，不要拖成 ai。", contrast: "和 ㅓ 的方向相反：ㅏ 的小横在右边，声音更亮。" },
+  "ㅓ": { image: "小横在左边，像声音往身体里收，读 eo。", mouth: "嘴半开，声音比 ㅏ 更靠后，像中文“哦”的前半但更短。", contrast: "ㅏ 明亮向外，ㅓ 靠后向内。" },
+  "ㅗ": { image: "短竖在上，像把声音顶到上方，读 o。", mouth: "嘴唇收圆，短短发 o。", contrast: "ㅗ 是上面有竖，ㅜ 是下面有竖。" },
+  "ㅜ": { image: "短竖在下，像嘴唇往下收圆，读 u。", mouth: "嘴唇更圆更向前，接近 wu 但不要加 w 太重。", contrast: "ㅜ 比 ㅗ 更闭、更圆。" },
+  "ㅡ": { image: "一条平线，像嘴巴拉平，读 eu。", mouth: "嘴唇放平，舌头后缩，不要读成中文“一”。", contrast: "和 ㅣ 不同，ㅣ 是竖线，声音更尖更靠前。" },
+  "ㅣ": { image: "一条竖线像一根针，声音也细直，读 i。", mouth: "嘴角微微向两边，短促读 i。", contrast: "ㅣ 靠前，ㅡ 靠后。" },
+  "ㄱ": { image: "像拐角，舌根在口腔后部轻轻挡一下，g/k。", mouth: "词首偏 k/g 之间，别读得太重。", contrast: "ㅋ 是更强的喷气 k，ㄲ 是更紧的 kk。" },
+  "ㄴ": { image: "像舌尖顶住上齿龈后落下来，n。", mouth: "舌尖轻顶上齿龈，鼻腔出声。", contrast: "和 ㄷ 位置接近，但 ㄴ 有鼻音。" },
+  "ㄷ": { image: "像一个小台阶，舌尖挡住再放开，d/t。", mouth: "舌尖轻顶上齿龈，释放要轻。", contrast: "ㅌ 是喷气 t，ㄸ 是紧音 tt。" },
+  "ㄹ": { image: "像弯来弯去的舌头，r/l 都和它有关。", mouth: "夹在元音间轻弹像 r，收音时更像 l。", contrast: "不要读成很重的英语 r。" },
+  "ㅁ": { image: "像一扇关上的门，双唇闭上发 m。", mouth: "嘴唇合住，让声音从鼻腔出去。", contrast: "ㅂ 也是双唇，但 ㅂ 会爆破，ㅁ 不爆破。" },
+  "ㅂ": { image: "像上下嘴唇合起来再打开，b/p。", mouth: "双唇轻闭再放开，词首不要爆得太重。", contrast: "ㅍ 是更强喷气 p，ㅃ 是紧音 pp。" },
+  "ㅅ": { image: "像牙齿间漏出一条细气流，s。", mouth: "舌尖靠近齿龈，气流细，不要卷舌。", contrast: "ㅆ 是更紧更用力的 ss。" },
+  "ㅇ": { image: "像一个空圈；在开头不发音，在结尾变 ng。", mouth: "开头只是占位置，收音时像 English sing 的 ng。", contrast: "不要在开头读出额外声音。" },
+  "ㅈ": { image: "像声音被挤一下再放出，j。", mouth: "接近 j/ch 之间，轻一点。", contrast: "ㅊ 是更强的 ch，ㅉ 是紧音 jj。" },
+  "ㅎ": { image: "像气从小帽子下面呼出来，h。", mouth: "轻轻送气，不要像中文喝那么重。", contrast: "ㅎ 常影响旁边音，有时会弱化。"},
+  "あ": { image: "字形开口大，像张嘴说 a。", mouth: "嘴自然张开，短而稳。", contrast: "あ 是 a，不要读成英语字母 A 的 /ei/。" },
+  "い": { image: "两笔像两根细线，声音也细，i。", mouth: "嘴角向两边，短促清晰。", contrast: "不是中文“衣”的长拖音。" },
+  "う": { image: "上面弯弯像嘴唇收起来，u。", mouth: "日语 u 嘴唇不必很圆，轻轻收。", contrast: "比英语 too 的 u 更短更放松。" },
+  "え": { image: "像先横再落下，声音落在 e。", mouth: "嘴半开，读 e，不要变成 ei。", contrast: "え 是单元音，别拖尾。" },
+  "お": { image: "圆转的笔画像嘴唇收圆，o。", mouth: "嘴唇圆一点，短促读 o。", contrast: "お 是 o，不是英语字母 O 的 ou。" },
+  "か": { image: "右边像一刀切开空气，ka。", mouth: "舌根轻挡再放开，后接 a。", contrast: "が 会浊化，か 更清。" },
+  "し": { image: "弯钩像气流滑出去，shi。", mouth: "不是 si，舌面抬起，像轻轻说 shi。", contrast: "さ 是 sa，し 是 shi。" },
+  "つ": { image: "像小钩子突然弹出，tsu。", mouth: "先 t 再 s，连成 tsu。", contrast: "不要读成单纯 su。" },
+  "ん": { image: "像声音收进鼻腔的弯线，n。", mouth: "根据后面音变化，可接近 n/m/ng。", contrast: "不是固定一个 n，要听后面音。" },
+  "ä": { image: "a 上面两点像把嘴角往两边拉，声音接近 e。", mouth: "从 a 的嘴型往 e 收，像 German Mädchen 的 ä。", contrast: "不是普通 a，也不是英语字母 A。" },
+  "ö": { image: "o 上面两点提醒你：嘴圆着，但舌头像 e。", mouth: "先摆 o 的圆唇，再在里面说 e。", contrast: "和 o 不同，ö 更前。" },
+  "ü": { image: "u 上面两点提醒你：嘴圆着，但舌头像 i。", mouth: "先摆 u 的圆唇，再说 i。", contrast: "中文没有完全一样的音，别读成 yu 太重。" },
+  "ß": { image: "像拉长的 s，发 ss。", mouth: "只读 s，不读 b。", contrast: "Straße 不是 strabe。" },
+  "ei": { image: "e 在前 i 在后，但读 ai，像顺序反过来记。", mouth: "读 ai，例词 mein。", contrast: "ie 才读长 i。" },
+  "ie": { image: "i 在前 e 在后，读长 i。", mouth: "拉长 i，例词 Liebe。", contrast: "ei 读 ai。" },
+  "ñ": { image: "n 上面的小波浪像舌头拱起来，读 ny。", mouth: "像 canyon 中间的 ny。", contrast: "ano 和 año 意思完全不同。" },
+  "rr": { image: "两个 r 像舌头连续颤两下。", mouth: "舌尖放松，让气流带动颤动。", contrast: "r 是单击，rr 是连续颤。" },
+  "ll": { image: "双 l 在很多地区读 y。", mouth: "先按 y 记，地区口音会变化。", contrast: "不要按英语 l-l 读。" },
+  "j": { image: "像从喉咙擦出来的气，西语 j 接近 h。", mouth: "喉部轻擦音，像很轻的 ha。", contrast: "不是英语 jump 的 j。" },
+  "ç": { image: "c 下面的小尾巴提醒你读 s。", mouth: "像 merci 里的 c，读 s。", contrast: "没有尾巴时 c 在 a/o/u 前常读 k。" },
+  "ou": { image: "两个字母合成一个 u 音。", mouth: "读 u，像 vous。", contrast: "u 单独出现是法语圆唇前元音。" },
+  "an": { image: "n 不完整发出来，声音进鼻腔。", mouth: "嘴张开，气从鼻腔走，别清楚读 n。", contrast: "法语鼻化音不是 an 两个音。" },
+  "on": { image: "o 的圆口型加鼻腔共鸣。", mouth: "嘴唇圆，声音从鼻腔出来。", contrast: "不要读成 on 的英文发音。" },
+  "r": { image: "法语 r 像喉咙后面轻轻摩擦。", mouth: "小舌附近轻擦，不卷舌。", contrast: "和英语 r、西语 r 都不同。" }
+};
+
+function isSoundDeck(word) {
+  return /sound|phonics|sounds/.test(word.deckId || "");
+}
+
+function soundHint(word) {
+  if (!isSoundDeck(word)) return null;
+  const exact = SOUND_HINTS[word.word];
+  if (exact) return exact;
+  if (/^[A-Z]$/.test(word.word)) {
+    return {
+      image: `${word.word} 先当作“字母名字”记，再进入自然拼读里的实际发音。`,
+      mouth: `先听字母名 ${word.phonetic || word.cn}，再跟读 3 次。`,
+      contrast: "字母名不等于它在单词里的所有读音，后面会继续学短元音和组合音。"
+    };
+  }
+  return {
+    image: "先看形状，再听声音，把视觉和口型绑在一起。",
+    mouth: `跟读 ${word.word}，注意不要加中文尾音。`,
+    contrast: "如果和相近音混淆，就把它们连续听三遍再做选择题。"
+  };
+}
+
 function memoryTip(word) {
+  const hint = soundHint(word);
+  if (hint) return `${hint.image} ${hint.mouth}`;
   const special = {
     abandon: "它不只是“放弃”，更像把人或东西丢下不管，带有“抛弃、遗弃”的情绪。",
     achieve: "achieve 是进度条到 100%，不是想做，而是真的完成目标。",
@@ -514,7 +712,10 @@ function renderWordCard(word) {
   const parent = word.parent ? findEntryByText(word.parent) : null;
   const related = (word.family || []).map(findEntryByText).filter(Boolean).slice(0, 8);
   const morphemes = (word.morphemes || []).slice(0, 4);
+  const patterns = relatedPatterns(word);
   const isEnglish = word.language === "en";
+  const phoneticLabel = isEnglish ? (word.phonetic || "音标加载中") : `罗马音 / 读音：${word.phonetic || "待补充"}`;
+  const structureTitle = isEnglish ? "词根 / 构词" : "读音 / 句型 / 用法";
   const soundButtons = isEnglish
     ? `<button class="ghost sound-btn" data-speak="en-US">美音</button><button class="ghost sound-btn" data-speak="en-GB">英音</button>`
     : `<button class="ghost sound-btn" data-speak="${escapeHtml(word.locale || LANGUAGE_META[word.language]?.locale || "en-US")}">发音</button>`;
@@ -528,7 +729,7 @@ function renderWordCard(word) {
     </div>
     <h2>${escapeHtml(word.word)}</h2>
     <div class="sound-line">
-      <p class="phonetic">${escapeHtml(word.phonetic || (isEnglish ? "音标加载中" : ""))}</p>
+      <p class="phonetic">${escapeHtml(phoneticLabel)}</p>
       ${soundButtons}
     </div>
     <p class="meaning">${escapeHtml(word.cn)}</p>
@@ -541,7 +742,10 @@ function renderWordCard(word) {
       <b>记忆提示</b>
       <span>${escapeHtml(memoryTip(word))}</span>
     </div>
-    ${morphemes.length ? `<div class="word-section"><b>词根 / 构词</b><div class="morpheme-row">${morphemes.map((item) => `<span><strong>${escapeHtml(item.part)}</strong>${escapeHtml(item.role)} · ${escapeHtml(item.meaning)}</span>`).join("")}</div></div>` : ""}
+    ${morphemes.length ? `<div class="word-section"><b>${structureTitle}</b><div class="morpheme-row">${morphemes.map((item) => `<span><strong>${escapeHtml(item.part)}</strong>${escapeHtml(item.role)} · ${escapeHtml(item.meaning)}</span>`).join("")}</div></div>` : ""}
+    <div class="word-section"><b>相关句型</b><div class="pattern-row">
+      ${patterns.map((pattern) => `<span><strong>${escapeHtml(pattern.pattern)}</strong>${escapeHtml(pattern.cn)}<em>${escapeHtml(pattern.example)} / ${escapeHtml(pattern.exampleZh)}</em></span>`).join("")}
+    </div></div>
     ${(related.length || parent) ? `<div class="word-section"><b>${parent ? "衍生词学习" : "延伸相关词"}</b><div class="related-row">
       ${parent ? `<button class="primary mini" data-open-entry="${parent.id}">返回主词：${escapeHtml(parent.word)}</button>` : ""}
       ${related.map((item) => `<button class="ghost mini" data-open-entry="${item.id}">${escapeHtml(item.word)}</button>`).join("")}
@@ -639,13 +843,19 @@ function makeChoices(word) {
 
 function renderQuiz() {
   const pool = quizPool();
+  quizPattern = null;
   quizWord = pool[Math.floor(Math.random() * pool.length)] || allWords[0];
+  if (quizMode === "pattern") {
+    const patterns = grammarPatterns();
+    quizPattern = patterns[Math.floor(Math.random() * patterns.length)] || patterns[0];
+  }
   $("#quizFeedback").textContent = "";
   $("#quizFeedback").className = "feedback";
-  $("#quizModeLabel").textContent = quizMode === "choice" ? "选择题" : "拼写题";
-  $("#toggleQuizMode").textContent = quizMode === "choice" ? "切换拼写题" : "切换选择题";
-  $("#quizPrompt").textContent = quizMode === "choice" ? quizWord.word : quizWord.cn;
-  $("#spellInput").classList.toggle("hidden", quizMode !== "spell");
+  $("#quizModeLabel").textContent = quizMode === "choice" ? "选择题" : quizMode === "spell" ? "拼写题" : "句型运用";
+  $("#toggleQuizMode").textContent = quizMode === "choice" ? "切换拼写题" : quizMode === "spell" ? "切换句型题" : "切换选择题";
+  $("#quizPrompt").textContent = quizMode === "choice" ? quizWord.word : quizMode === "spell" ? quizWord.cn : `用句型表达：${quizPattern.prompt}`;
+  $("#spellInput").classList.toggle("hidden", quizMode === "choice");
+  $("#spellInput").placeholder = quizMode === "pattern" ? "输入完整句子" : "输入对应词";
   $("#spellInput").value = "";
   $("#quizOptions").classList.toggle("hidden", quizMode !== "choice");
   $("#quizOptions").innerHTML = quizMode === "choice"
@@ -655,13 +865,58 @@ function renderQuiz() {
 }
 
 function checkQuiz(answer) {
-  const ok = quizMode === "choice" ? answer === quizWord.cn : normalize(answer) === normalize(quizWord.word);
-  markWord(quizWord, ok);
+  const ok = quizMode === "choice"
+    ? answer === quizWord.cn
+    : quizMode === "spell"
+      ? normalizeAnswer(answer) === normalizeAnswer(quizWord.word)
+      : normalizeAnswer(answer) === normalizeAnswer(quizPattern.answer);
+  if (quizMode === "pattern") {
+    markDailyActivity();
+  } else {
+    markWord(quizWord, ok);
+  }
   $("#quizFeedback").textContent = ok
-    ? "答对了，很稳。这个词会晚一点再来找你。"
-    : `没关系，正确答案是 ${quizWord.word}：${quizWord.cn}。它会优先进入复习。`;
+    ? "答对了，很稳。会用句型，单词才真正活起来。"
+    : quizMode === "pattern"
+      ? `没关系，参考答案：${quizPattern.answer}。${quizPattern.cn}`
+      : `没关系，正确答案是 ${quizWord.word}：${quizWord.cn}。它会优先进入复习。`;
   $("#quizFeedback").classList.toggle("ok", ok);
   $("#quizFeedback").classList.toggle("bad", !ok);
+}
+
+function renderGrammar() {
+  $("#grammarList").innerHTML = grammarPatterns().map((pattern) => `
+    <article class="grammar-card">
+      <div>
+        <span>${escapeHtml(pattern.level)}</span>
+        <h4>${escapeHtml(pattern.title)}</h4>
+        <p class="pattern">${escapeHtml(pattern.pattern)}</p>
+        <p>${escapeHtml(pattern.cn)}</p>
+      </div>
+      <div class="example">
+        <p>${escapeHtml(pattern.example)}</p>
+        <span>${escapeHtml(pattern.exampleZh)}</span>
+      </div>
+      <button class="ghost" data-pattern-test="${pattern.id}">测这个句型</button>
+    </article>
+  `).join("");
+  $$("[data-pattern-test]").forEach((button) => button.addEventListener("click", () => {
+    quizMode = "pattern";
+    switchView("quiz");
+    quizPattern = grammarPatterns().find((pattern) => pattern.id === button.dataset.patternTest);
+    if (quizPattern) {
+      $("#quizModeLabel").textContent = "句型运用";
+      $("#toggleQuizMode").textContent = "切换选择题";
+      $("#quizPrompt").textContent = `用句型表达：${quizPattern.prompt}`;
+      $("#spellInput").classList.remove("hidden");
+      $("#spellInput").placeholder = "输入完整句子";
+      $("#spellInput").value = "";
+      $("#quizOptions").classList.add("hidden");
+      $("#quizOptions").innerHTML = "";
+      $("#quizFeedback").textContent = "";
+      $("#quizFeedback").className = "feedback";
+    }
+  }));
 }
 
 function renderMistakes() {
@@ -688,10 +943,11 @@ function switchView(id) {
   activeView = id;
   $$(".nav-btn").forEach((button) => button.classList.toggle("active", button.dataset.view === id));
   $$(".view").forEach((view) => view.classList.toggle("active", view.id === id));
-  const titles = { dashboard: "Dashboard", learn: "单词学习", quiz: "小测验", mistakes: "错词本" };
+  const titles = { dashboard: "Dashboard", learn: "单词学习", grammar: "语法句型", quiz: "小测验", mistakes: "错词本" };
   $("#pageTitle").textContent = titles[id];
   if (id === "dashboard") renderDashboard();
   if (id === "learn") showNextWord();
+  if (id === "grammar") renderGrammar();
   if (id === "quiz") renderQuiz();
   if (id === "mistakes") renderMistakes();
 }
@@ -738,7 +994,7 @@ function boot() {
   $("#startTodayBtn").addEventListener("click", startLearning);
   $("#favoriteBtn").addEventListener("click", () => currentWord && $("#toggleFavorite")?.click());
   $("#toggleQuizMode").addEventListener("click", () => {
-    quizMode = quizMode === "choice" ? "spell" : "choice";
+    quizMode = quizMode === "choice" ? "spell" : quizMode === "spell" ? "pattern" : "choice";
     renderQuiz();
   });
   $("#spellInput").addEventListener("keydown", (event) => {
